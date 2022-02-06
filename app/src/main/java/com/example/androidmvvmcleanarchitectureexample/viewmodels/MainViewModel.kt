@@ -1,11 +1,9 @@
-package com.example.androidmvvmcleanarchitectureexample
+package com.example.androidmvvmcleanarchitectureexample.viewmodels
 
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -25,12 +23,10 @@ class MainViewModel @Inject constructor(
 
     var recipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
 
-    @RequiresApi(Build.VERSION_CODES.M)
     fun getRecipes(queries: Map<String, String>) = viewModelScope.launch {
         getRecipesSafeCall(queries)
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private suspend fun getRecipesSafeCall(queries: Map<String, String>) {
         recipesResponse.value = NetworkResult.Loading()
         if (hasInternetConnection()) {
@@ -66,7 +62,6 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun hasInternetConnection(): Boolean {
         val connectivityManager = getApplication<Application>().getSystemService(
             Context.CONNECTIVITY_SERVICE
