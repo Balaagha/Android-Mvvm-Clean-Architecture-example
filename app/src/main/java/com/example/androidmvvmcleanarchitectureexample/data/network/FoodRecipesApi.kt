@@ -1,4 +1,4 @@
-package com.example.androidmvvmcleanarchitectureexample
+package com.example.androidmvvmcleanarchitectureexample.data.network
 
 import com.example.androidmvvmcleanarchitectureexample.models.FoodRecipe
 import retrofit2.Response

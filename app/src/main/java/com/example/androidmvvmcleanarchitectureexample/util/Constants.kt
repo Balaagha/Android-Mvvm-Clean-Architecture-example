@@ -1,4 +1,4 @@
-package com.example.androidmvvmcleanarchitectureexample
+package com.example.androidmvvmcleanarchitectureexample.util
 
 class Constants {
 
