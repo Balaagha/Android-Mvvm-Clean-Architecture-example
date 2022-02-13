@@ -1,11 +1,13 @@
 package com.example.androidmvvmcleanarchitectureexample.ui.fragments.recipes
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -15,14 +17,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidmvvmcleanarchitectureexample.R
 import com.example.androidmvvmcleanarchitectureexample.adapters.RecipesAdapter
 import com.example.androidmvvmcleanarchitectureexample.databinding.FragmentRecipesBinding
+import com.example.androidmvvmcleanarchitectureexample.util.NetworkListener
 import com.example.androidmvvmcleanarchitectureexample.util.NetworkResult
 import com.example.androidmvvmcleanarchitectureexample.util.observeOnce
 import com.example.androidmvvmcleanarchitectureexample.viewmodels.MainViewModel
 import com.example.androidmvvmcleanarchitectureexample.viewmodels.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class RecipesFragment : Fragment() {
 
@@ -35,6 +40,9 @@ class RecipesFragment : Fragment() {
     private lateinit var recipesViewModel: RecipesViewModel
     private val mAdapter by lazy { RecipesAdapter() }
 
+    private lateinit var networkListener: NetworkListener
+
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
@@ -51,13 +59,35 @@ class RecipesFragment : Fragment() {
         binding.mainViewModel = mainViewModel
 
         setupRecyclerView()
-        readDatabase()
+
+        recipesViewModel.readBackOnline.observe(viewLifecycleOwner, {
+            recipesViewModel.backOnline = it
+        })
+
+        initNetworkListener()
 
         binding.recipesFab.setOnClickListener {
-            findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+            if (recipesViewModel.networkStatus) {
+                findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+            } else {
+                recipesViewModel.showNetworkStatus()
+            }
         }
 
         return binding.root
+    }
+
+    private fun initNetworkListener() {
+        lifecycleScope.launch {
+            networkListener = NetworkListener()
+            networkListener.checkNetworkAvailability(requireContext())
+                .collect { status ->
+                    Log.d("NetworkListener", status.toString())
+                    recipesViewModel.networkStatus = status
+                    recipesViewModel.showNetworkStatus()
+                    readDatabase()
+                }
+        }
     }
 
     private fun setupRecyclerView() {
