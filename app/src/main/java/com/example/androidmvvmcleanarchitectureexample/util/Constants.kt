@@ -35,3 +35,7 @@ class Constants {
     }
 
 }
+
+object Bundles {
+    const val RECIPES_RESULT = "recipeResultBundle"
+}

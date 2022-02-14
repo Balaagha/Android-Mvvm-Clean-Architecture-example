@@ -1,14 +1,10 @@
-package com.example.androidmvvmcleanarchitectureexample.util
+package com.example.androidmvvmcleanarchitectureexample.util.helper
 
 import android.content.Context
 import android.net.*
 import android.os.Build
 import android.util.Log
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-
 
 
 class NetworkListener : ConnectivityManager.NetworkCallback() {

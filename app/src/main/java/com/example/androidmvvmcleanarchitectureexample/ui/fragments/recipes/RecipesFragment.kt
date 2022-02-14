@@ -16,9 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidmvvmcleanarchitectureexample.R
 import com.example.androidmvvmcleanarchitectureexample.adapters.RecipesAdapter
 import com.example.androidmvvmcleanarchitectureexample.databinding.FragmentRecipesBinding
-import com.example.androidmvvmcleanarchitectureexample.util.NetworkListener
+import com.example.androidmvvmcleanarchitectureexample.util.helper.NetworkListener
 import com.example.androidmvvmcleanarchitectureexample.util.NetworkResult
-import com.example.androidmvvmcleanarchitectureexample.util.observeOnce
+import com.example.androidmvvmcleanarchitectureexample.util.extentions.observeOnce
 import com.example.androidmvvmcleanarchitectureexample.viewmodels.MainViewModel
 import com.example.androidmvvmcleanarchitectureexample.viewmodels.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
