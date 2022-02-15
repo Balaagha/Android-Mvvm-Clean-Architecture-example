@@ -12,7 +12,7 @@ import coil.load
 import com.example.androidmvvmcleanarchitectureexample.R
 import com.example.androidmvvmcleanarchitectureexample.ui.fragments.recipes.RecipesFragmentDirections
 import java.lang.Exception
-import com.example.androidmvvmcleanarchitectureexample.models.Result
+import com.example.androidmvvmcleanarchitectureexample.models.RecipesResult
 import org.jsoup.Jsoup
 
 class RecipesRowBinding {
@@ -21,12 +21,12 @@ class RecipesRowBinding {
 
         @BindingAdapter("onRecipeClickListener")
         @JvmStatic
-        fun onRecipeClickListener(recipeRowLayout: ConstraintLayout, result: Result) {
+        fun onRecipeClickListener(recipeRowLayout: ConstraintLayout, recipesResult: RecipesResult) {
             Log.d("onRecipeClickListener", "CALLED")
             recipeRowLayout.setOnClickListener {
                 try {
                     val action =
-                        RecipesFragmentDirections.actionRecipesFragmentToDetailsActivity(result)
+                        RecipesFragmentDirections.actionRecipesFragmentToDetailsActivity(recipesResult)
                     recipeRowLayout.findNavController().navigate(action)
                 } catch (e: Exception) {
                     Log.d("onRecipeClickListener", e.toString())
