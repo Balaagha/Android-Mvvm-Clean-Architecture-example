@@ -16,7 +16,7 @@ import com.example.androidmvvmcleanarchitectureexample.adapters.PagerAdapter
 import com.example.androidmvvmcleanarchitectureexample.ui.fragments.recipesdetail.ingredients.IngredientsFragment
 import com.example.androidmvvmcleanarchitectureexample.ui.fragments.recipesdetail.instructions.InstructionsFragment
 import com.example.androidmvvmcleanarchitectureexample.ui.fragments.recipesdetail.overview.OverviewFragment
-import com.example.androidmvvmcleanarchitectureexample.util.Bundles.RECIPES_RESULT
+import com.example.androidmvvmcleanarchitectureexample.util.Bundles.RECIPE_RESULT_KEY
 import com.example.androidmvvmcleanarchitectureexample.util.extentions.applyScaleTransformer
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_details.*
@@ -65,7 +65,7 @@ class DetailsActivity : AppCompatActivity() {
         fragments.add(InstructionsFragment())
 
         val resultBundle = Bundle()
-        resultBundle.putParcelable(RECIPES_RESULT, args.result)
+        resultBundle.putParcelable(RECIPE_RESULT_KEY, args.result)
 
         val adapter = PagerAdapter(this, resultBundle, fragments)
 
