@@ -10,11 +10,15 @@ import com.example.androidmvvmcleanarchitectureexample.R
 import com.example.androidmvvmcleanarchitectureexample.adapters.IngredientsAdapter
 import com.example.androidmvvmcleanarchitectureexample.util.Bundles.RECIPE_RESULT_KEY
 import kotlinx.android.synthetic.main.fragment_ingredients.view.*
-import com.example.androidmvvmcleanarchitectureexample.models.Result
+import com.example.androidmvvmcleanarchitectureexample.models.RecipesResult
+import com.example.androidmvvmcleanarchitectureexample.util.helper.argument
 
 class IngredientsFragment : Fragment() {
 
     private val mAdapter: IngredientsAdapter by lazy { IngredientsAdapter() }
+
+    private val recipeResultBundle : RecipesResult? by argument()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,11 +27,12 @@ class IngredientsFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_ingredients, container, false)
 
-        val args = arguments
-        val myBundle: Result? = args?.getParcelable(RECIPE_RESULT_KEY)
+//        val args = arguments
+//        val recipeResultBundle: RecipesResult? = args?.getParcelable(RECIPE_RESULT_KEY)
+
 
         setupRecyclerView(view)
-        myBundle?.extendedIngredients?.let {
+        recipeResultBundle?.extendedIngredients?.let {
             mAdapter.setData(it)
         }
         return view
