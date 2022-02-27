@@ -8,15 +8,17 @@ import androidx.appcompat.widget.SearchView;
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidmvvmcleanarchitectureexample.R
 import com.example.androidmvvmcleanarchitectureexample.adapters.RecipesAdapter
 import com.example.androidmvvmcleanarchitectureexample.databinding.FragmentRecipesBinding
-import com.example.androidmvvmcleanarchitectureexample.util.helper.NetworkListener
+import com.example.androidmvvmcleanarchitectureexample.util.helper.NetworkStatusListenerHelper
 import com.example.androidmvvmcleanarchitectureexample.util.NetworkResult
 import com.example.androidmvvmcleanarchitectureexample.util.extentions.observeOnce
 import com.example.androidmvvmcleanarchitectureexample.viewmodels.MainViewModel
@@ -25,6 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -39,13 +42,15 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var recipesViewModel: RecipesViewModel
     private val mAdapter by lazy { RecipesAdapter() }
 
-    private lateinit var networkListener: NetworkListener
+    @Inject
+    lateinit var networkStatusListenerHelper: NetworkStatusListenerHelper
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         recipesViewModel = ViewModelProvider(requireActivity())[RecipesViewModel::class.java]
+        Log.d("myTag","onCreate")
     }
 
     override fun onCreateView(
@@ -62,6 +67,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         setupRecyclerView()
 
         recipesViewModel.readBackOnline.observe(viewLifecycleOwner, {
+            Log.d("myTag","observe readBackOnline in receipt fragment | backOnline => $it")
             recipesViewModel.backOnline = it
         })
 
@@ -69,25 +75,30 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
 
         binding.recipesFab.setOnClickListener {
             if (recipesViewModel.networkStatus) {
-                findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+                val bundle = Bundle()
+                bundle.putAll(arguments)
+                findNavController().navigate(R.id.recipesBottomSheet,bundle)
             } else {
                 recipesViewModel.showNetworkStatus()
             }
         }
-
+        Log.d("myTag","onCreateView")
         return binding.root
     }
 
+
+
     private fun initNetworkListener() {
-        lifecycleScope.launch {
-            networkListener = NetworkListener()
-            networkListener.checkNetworkAvailability(requireContext())
-                .collect { status ->
-                    Log.d("NetworkListener", status.toString())
-                    recipesViewModel.networkStatus = status
-                    recipesViewModel.showNetworkStatus()
-                    readDatabase()
-                }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                networkStatusListenerHelper.checkNetworkAvailability()
+                    .collect { status ->
+                        Log.d("myTag", "network status in Receipt $status")
+                        recipesViewModel.networkStatus = status
+                        recipesViewModel.showNetworkStatus()
+                        readDatabase()
+                    }
+            }
         }
     }
 
@@ -205,9 +216,39 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         binding.recyclerview.hideShimmer()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.d("myTag","onViewCreated")
+    }
+    override fun onStart() {
+        super.onStart()
+        Log.d("myTag","onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("myTag","onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("myTag","onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("myTag","onStop")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("myTag","onDestroyView")
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        Log.d("myTag","onDestroy")
     }
 
 }

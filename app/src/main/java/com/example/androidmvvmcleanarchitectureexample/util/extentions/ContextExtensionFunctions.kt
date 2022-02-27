@@ -15,6 +15,10 @@ import androidx.fragment.app.Fragment
 import java.lang.ref.WeakReference
 
 
+val Context.connectivityManager: ConnectivityManager
+    get() =
+        this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
 fun Context.hideKeyboard(focusedView: View? = null) {
     val view = focusedView ?: (this as? AppCompatActivity
         ?: if (this is Fragment) this.activity else null)?.currentFocus
