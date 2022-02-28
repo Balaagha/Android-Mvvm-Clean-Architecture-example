@@ -3,7 +3,7 @@ package com.example.androidmvvmcleanarchitectureexample.di
 import android.content.Context
 import androidx.room.Room
 import com.example.androidmvvmcleanarchitectureexample.data.database.RecipesDatabase
-import com.example.androidmvvmcleanarchitectureexample.util.Constants.Companion.DATABASE_NAME
+import com.example.androidmvvmcleanarchitectureexample.data.database.common.DatabaseConstant.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

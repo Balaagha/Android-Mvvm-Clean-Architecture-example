@@ -24,6 +24,8 @@ class NetworkStatusListenerHelper @Inject constructor(
         ProcessLifecycleOwner.get().lifecycleScope, SharingStarted.WhileSubscribed()
     )
 
+    fun getNetworkAvailabilityStatus() = isNetworkAvailable.value
+
     fun init(): MutableStateFlow<Boolean> {
 
         /**

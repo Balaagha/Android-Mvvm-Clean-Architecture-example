@@ -3,9 +3,8 @@ package com.example.androidmvvmcleanarchitectureexample.data.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.androidmvvmcleanarchitectureexample.data.database.RecipesDao
-import com.example.androidmvvmcleanarchitectureexample.data.database.RecipesEntity
-import com.example.androidmvvmcleanarchitectureexample.data.database.RecipesTypeConverter
+import com.example.androidmvvmcleanarchitectureexample.data.database.receiptui.RecipesDao
+import com.example.androidmvvmcleanarchitectureexample.data.database.receiptui.RecipesEntity
 
 @Database(
     entities = [RecipesEntity::class],

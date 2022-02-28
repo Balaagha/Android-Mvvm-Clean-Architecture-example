@@ -1,7 +1,7 @@
 package com.example.androidmvvmcleanarchitectureexample.data
 
-import com.example.androidmvvmcleanarchitectureexample.data.database.RecipesDao
-import com.example.androidmvvmcleanarchitectureexample.data.database.RecipesEntity
+import com.example.androidmvvmcleanarchitectureexample.data.database.receiptui.RecipesDao
+import com.example.androidmvvmcleanarchitectureexample.data.database.receiptui.RecipesEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

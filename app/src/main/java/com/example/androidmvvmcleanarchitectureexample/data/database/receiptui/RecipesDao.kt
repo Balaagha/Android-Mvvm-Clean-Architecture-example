@@ -1,4 +1,4 @@
-package com.example.androidmvvmcleanarchitectureexample.data.database
+package com.example.androidmvvmcleanarchitectureexample.data.database.receiptui
 
 import androidx.room.Dao
 import androidx.room.Insert
