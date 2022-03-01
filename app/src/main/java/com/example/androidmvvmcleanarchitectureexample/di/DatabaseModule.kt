@@ -2,8 +2,9 @@ package com.example.androidmvvmcleanarchitectureexample.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.androidmvvmcleanarchitectureexample.data.database.RecipesDatabase
+import com.example.androidmvvmcleanarchitectureexample.data.database.AppDatabase
 import com.example.androidmvvmcleanarchitectureexample.data.database.common.DatabaseConstant.DATABASE_NAME
+import com.example.androidmvvmcleanarchitectureexample.data.database.receiptui.RecipesDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,19 +19,27 @@ object DatabaseModule {
     @Singleton
     @Provides
     fun provideDatabase(
-        @ApplicationContext context: Context
-    ): RecipesDatabase {
+        @ApplicationContext context: Context,
+    ): AppDatabase {
         return Room.databaseBuilder(
             context,
-            RecipesDatabase::class.java,
+            AppDatabase::class.java,
             DATABASE_NAME
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
 
     @Singleton
     @Provides
-    fun provideDao(
-        database: RecipesDatabase
-    ) = database.recipesDao()
+    fun provideRecipesDao(
+        database: AppDatabase,
+    ): RecipesDao {
+        return database.recipesDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideContactListDao(
+        database: AppDatabase,
+    ) = database.contactListDao()
 
 }
