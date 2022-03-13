@@ -17,3 +17,13 @@ object ConfigData {
     const val dataBinding = true
 
 }
+
+object Modules {
+    const val data = ":data"
+    const val domain = ":domain"
+    const val presentation = ":presentation"
+    const val prettyPopUp = ":prettyPopUp"
+    const val actionChooser = ":actionChooser"
+    const val appTutorial = ":appTutorial"
+    const val imagesSlider = ":imagesSlider"
+}
