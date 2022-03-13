@@ -7,4 +7,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Android Mvvm Clean Architecture Example"
-include ':app'
+include(":app")
