@@ -4,9 +4,9 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.appcompat.widget.SearchView;
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -18,9 +18,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidmvvmcleanarchitectureexample.R
 import com.example.androidmvvmcleanarchitectureexample.adapters.RecipesAdapter
 import com.example.androidmvvmcleanarchitectureexample.databinding.FragmentRecipesBinding
-import com.example.androidmvvmcleanarchitectureexample.util.helper.NetworkStatusListenerHelper
 import com.example.androidmvvmcleanarchitectureexample.util.NetworkResult
 import com.example.androidmvvmcleanarchitectureexample.util.extentions.observeOnce
+import com.example.androidmvvmcleanarchitectureexample.util.helper.NetworkStatusListenerHelper
 import com.example.androidmvvmcleanarchitectureexample.viewmodels.MainViewModel
 import com.example.androidmvvmcleanarchitectureexample.viewmodels.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
