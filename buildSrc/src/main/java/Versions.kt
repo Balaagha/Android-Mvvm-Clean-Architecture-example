@@ -1,5 +1,11 @@
 object Versions {
 
+    // Gradle
+    const val gradleVersion = "7.0.2"
+
+    // Kotlin
+    const val kotlinVersion = "1.5.30"
+
     // Coroutine
     const val coroutineVersion ="1.5.2"
 
