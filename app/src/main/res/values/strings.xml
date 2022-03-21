@@ -46,4 +46,16 @@
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </string>
     <string name="share">Share</string>
+
+
+
+    <string name="base_no_internet_connection" >
+        No internet connection, please try again!
+    </string>
+    <string name="base_operation_take_long_time" >
+        Operation take long time, please try again!
+    </string>
+    <string name="base_generic_error" >
+        Error occurs, please try again!
+    </string>
 </resources>
