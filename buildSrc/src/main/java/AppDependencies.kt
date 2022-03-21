@@ -1,6 +1,6 @@
 import org.gradle.api.artifacts.dsl.DependencyHandler
 
-object Dependencies {
+object AppDependencies {
     val commonImplementationLibraries = arrayListOf<String>().apply {
         add(AppCompat.appcompat)
 

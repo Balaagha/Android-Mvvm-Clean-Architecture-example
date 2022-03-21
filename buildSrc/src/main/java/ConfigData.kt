@@ -18,12 +18,16 @@ object ConfigData {
 
 }
 
+object Dependencies {
+    const val jitPackURL = "https://jitpack.io"
+    const val gradle = "com.android.tools.build:gradle:${Versions.gradleVersion}"
+    const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlinVersion}"
+    const val navigationSafeArgsPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navVersion}"
+    const val hiltAndroidGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.daggerHiltVersion}"
+}
+
 object Modules {
     const val data = ":data"
     const val domain = ":domain"
     const val presentation = ":presentation"
-    const val prettyPopUp = ":prettyPopUp"
-    const val actionChooser = ":actionChooser"
-    const val appTutorial = ":appTutorial"
-    const val imagesSlider = ":imagesSlider"
 }

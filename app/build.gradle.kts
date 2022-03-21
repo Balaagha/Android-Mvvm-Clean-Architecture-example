@@ -43,12 +43,12 @@ android {
 
 dependencies {
     // App Libraries
-    implementation(Dependencies.commonImplementationLibraries)
-    kapt(Dependencies.commonKaptLibraries)
+    implementation(AppDependencies.commonImplementationLibraries)
+    kapt(AppDependencies.commonKaptLibraries)
 
     implementation(project(Modules.data))
 
     // Test Libraries
-    testImplementation(Dependencies.testLibraries)
-    androidTestImplementation(Dependencies.androidTestLibraries)
+    testImplementation(AppDependencies.testLibraries)
+    androidTestImplementation(AppDependencies.androidTestLibraries)
 }
