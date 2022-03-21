@@ -13,7 +13,7 @@ import com.example.androidmvvmcleanarchitectureexample.data.database.receiptui.R
         RecipesEntity::class,
         CachedMobileNumber::class
     ],
-    version = 5,
+    version = 6,
     exportSchema = false
 )
 @TypeConverters(RecipesTypeConverter::class)
