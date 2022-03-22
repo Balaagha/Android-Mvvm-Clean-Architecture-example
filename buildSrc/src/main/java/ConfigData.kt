@@ -29,6 +29,7 @@ object Dependencies {
 object Modules {
     const val data = ":data"
     const val common = ":common"
+    const val core = ":core"
     const val domain = ":domain"
     const val presentation = ":presentation"
 }
