@@ -1,4 +1,4 @@
-package com.example.androidmvvmcleanarchitectureexample.util.helper
+package com.example.common.utils.helper
 
 import android.content.Context
 import android.net.*
@@ -6,7 +6,7 @@ import android.os.Build
 import android.util.Log
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
-import com.example.androidmvvmcleanarchitectureexample.util.extentions.connectivityManager
+import com.example.common.utils.extentions.connectivityManager
 import com.example.common.commonimpl.NetworkStatusListenerHelper
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.*

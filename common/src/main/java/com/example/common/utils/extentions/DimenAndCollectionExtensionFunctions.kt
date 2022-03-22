@@ -1,9 +1,6 @@
-package com.example.androidmvvmcleanarchitectureexample.util.extentions
+package com.example.common.utils.extentions
 
 import android.content.res.Resources
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*

@@ -1,8 +1,7 @@
-package com.example.androidmvvmcleanarchitectureexample.util.extentions
+package com.example.common.utils.extentions
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 
 

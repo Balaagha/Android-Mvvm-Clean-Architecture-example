@@ -19,7 +19,7 @@ import com.example.androidmvvmcleanarchitectureexample.R
 import com.example.androidmvvmcleanarchitectureexample.adapters.RecipesAdapter
 import com.example.androidmvvmcleanarchitectureexample.databinding.FragmentRecipesBinding
 import com.example.androidmvvmcleanarchitectureexample.util.NetworkResult
-import com.example.androidmvvmcleanarchitectureexample.util.extentions.observeOnce
+import com.example.common.utils.extentions.observeOnce
 import com.example.androidmvvmcleanarchitectureexample.viewmodels.MainViewModel
 import com.example.androidmvvmcleanarchitectureexample.viewmodels.RecipesViewModel
 import com.example.common.commonimpl.NetworkStatusListenerHelper

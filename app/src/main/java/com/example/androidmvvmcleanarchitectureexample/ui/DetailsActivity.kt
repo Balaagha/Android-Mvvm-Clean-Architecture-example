@@ -17,8 +17,8 @@ import com.example.androidmvvmcleanarchitectureexample.ui.fragments.recipesdetai
 import com.example.androidmvvmcleanarchitectureexample.ui.fragments.recipesdetail.instructions.InstructionsFragment
 import com.example.androidmvvmcleanarchitectureexample.ui.fragments.recipesdetail.overview.OverviewFragment
 import com.example.androidmvvmcleanarchitectureexample.util.Bundles.RECIPE_RESULT_KEY
-import com.example.androidmvvmcleanarchitectureexample.util.extentions.applyScaleTransformer
-import com.example.androidmvvmcleanarchitectureexample.util.extentions.put
+import com.example.common.utils.extentions.applyScaleTransformer
+import com.example.common.utils.extentions.put
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_details.*
 

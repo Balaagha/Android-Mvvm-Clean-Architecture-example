@@ -1,4 +1,4 @@
-package com.example.androidmvvmcleanarchitectureexample.util.extentions
+package com.example.common.utils.extentions
 
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.ViewPager2

@@ -1,8 +1,8 @@
-package com.example.androidmvvmcleanarchitectureexample.util.helper
+package com.example.common.utils.helper
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.androidmvvmcleanarchitectureexample.util.extentions.put
+import com.example.common.utils.extentions.put
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 

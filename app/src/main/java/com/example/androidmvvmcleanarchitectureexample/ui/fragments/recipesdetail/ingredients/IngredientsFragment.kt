@@ -11,7 +11,7 @@ import com.example.androidmvvmcleanarchitectureexample.adapters.IngredientsAdapt
 import com.example.androidmvvmcleanarchitectureexample.util.Bundles.RECIPE_RESULT_KEY
 import kotlinx.android.synthetic.main.fragment_ingredients.view.*
 import com.example.androidmvvmcleanarchitectureexample.models.RecipesResult
-import com.example.androidmvvmcleanarchitectureexample.util.helper.argument
+import com.example.common.utils.helper.argument
 
 class IngredientsFragment : Fragment() {
 

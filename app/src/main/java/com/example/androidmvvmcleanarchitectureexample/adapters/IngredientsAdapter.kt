@@ -9,7 +9,7 @@ import com.example.androidmvvmcleanarchitectureexample.R
 import com.example.androidmvvmcleanarchitectureexample.models.ExtendedIngredient
 import com.example.androidmvvmcleanarchitectureexample.util.Constants.Companion.BASE_IMAGE_URL
 import com.example.androidmvvmcleanarchitectureexample.util.RecipesDiffUtil
-import com.example.androidmvvmcleanarchitectureexample.util.extentions.loadImageFromUrl
+import com.example.common.utils.extentions.loadImageFromUrl
 import kotlinx.android.synthetic.main.ingredients_row_layout.view.*
 import java.util.*
 

@@ -1,4 +1,4 @@
-package com.example.androidmvvmcleanarchitectureexample.util.extentions
+package com.example.common.utils.extentions
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -11,12 +11,7 @@ import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.StyleRes
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import coil.load
-import coil.transform.CircleCropTransformation
-import com.example.androidmvvmcleanarchitectureexample.R
 import com.google.android.material.textview.MaterialTextView
 
 

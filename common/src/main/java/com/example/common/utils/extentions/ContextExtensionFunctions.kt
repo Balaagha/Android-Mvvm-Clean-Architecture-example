@@ -1,4 +1,4 @@
-package com.example.androidmvvmcleanarchitectureexample.util.extentions
+package com.example.common.utils.extentions
 
 import android.app.Activity
 import android.content.Context

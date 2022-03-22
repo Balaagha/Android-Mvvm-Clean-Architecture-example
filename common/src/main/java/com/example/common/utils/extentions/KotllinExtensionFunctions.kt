@@ -1,4 +1,4 @@
-package com.example.androidmvvmcleanarchitectureexample.util.extentions
+package com.example.common.utils.extentions
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData

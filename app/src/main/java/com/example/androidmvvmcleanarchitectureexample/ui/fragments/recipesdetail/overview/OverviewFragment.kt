@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import coil.load
 import com.example.androidmvvmcleanarchitectureexample.R
 import com.example.androidmvvmcleanarchitectureexample.models.RecipesResult
-import com.example.androidmvvmcleanarchitectureexample.util.helper.argument
+import com.example.common.utils.helper.argument
 import kotlinx.android.synthetic.main.fragment_overview.view.*
 import org.jsoup.Jsoup
 
