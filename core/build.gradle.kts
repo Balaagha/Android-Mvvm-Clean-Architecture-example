@@ -21,9 +21,9 @@ android {
         }
     }
 
-//    buildFeatures {
-//        dataBinding = ConfigData.dataBinding
-//    }
+    buildFeatures {
+        dataBinding = ConfigData.dataBinding
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
