@@ -7,26 +7,26 @@ import android.util.Log
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import com.example.androidmvvmcleanarchitectureexample.util.extentions.connectivityManager
+import com.example.common.commonimpl.NetworkStatusListenerHelper
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class NetworkStatusListenerHelper @Inject constructor(
+class NetworkStatusListenerHelperImpl @Inject constructor(
     @ApplicationContext private val context: Context
-    ) :
-    ConnectivityManager.NetworkCallback() {
+    ) : ConnectivityManager.NetworkCallback(), NetworkStatusListenerHelper {
 
     private val isNetworkAvailable = MutableStateFlow(false)
 
-    fun checkNetworkAvailability() = isNetworkAvailable.asSharedFlow().shareIn(
+    override fun checkNetworkAvailability() = isNetworkAvailable.asSharedFlow().shareIn(
         ProcessLifecycleOwner.get().lifecycleScope, SharingStarted.WhileSubscribed()
     )
 
-    fun getNetworkAvailabilityStatus() = isNetworkAvailable.value
+    override fun getNetworkAvailabilityStatus() = isNetworkAvailable.value
 
-    fun init(): MutableStateFlow<Boolean> {
+    override fun init(): MutableStateFlow<Boolean> {
 
         /**
          * Other way for to get connectivityManager => context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

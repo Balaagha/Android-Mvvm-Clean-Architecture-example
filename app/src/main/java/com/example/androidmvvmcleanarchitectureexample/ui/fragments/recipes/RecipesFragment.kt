@@ -20,9 +20,9 @@ import com.example.androidmvvmcleanarchitectureexample.adapters.RecipesAdapter
 import com.example.androidmvvmcleanarchitectureexample.databinding.FragmentRecipesBinding
 import com.example.androidmvvmcleanarchitectureexample.util.NetworkResult
 import com.example.androidmvvmcleanarchitectureexample.util.extentions.observeOnce
-import com.example.androidmvvmcleanarchitectureexample.util.helper.NetworkStatusListenerHelper
 import com.example.androidmvvmcleanarchitectureexample.viewmodels.MainViewModel
 import com.example.androidmvvmcleanarchitectureexample.viewmodels.RecipesViewModel
+import com.example.common.commonimpl.NetworkStatusListenerHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect

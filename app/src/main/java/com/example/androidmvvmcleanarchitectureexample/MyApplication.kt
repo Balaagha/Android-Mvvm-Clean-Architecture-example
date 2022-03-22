@@ -1,7 +1,7 @@
 package com.example.androidmvvmcleanarchitectureexample
 
 import android.app.Application
-import com.example.androidmvvmcleanarchitectureexample.util.helper.NetworkStatusListenerHelper
+import com.example.common.commonimpl.NetworkStatusListenerHelper
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 

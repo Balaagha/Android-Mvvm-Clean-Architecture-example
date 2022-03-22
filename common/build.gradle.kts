@@ -1,9 +1,8 @@
 plugins {
-    id(Plugins.application)
+    id(Plugins.library)
     id(Plugins.kotlinAndroid)
-    id(Plugins.kotlinKapt)
     id(Plugins.kotlinAndroidExtensions)
-    id(Plugins.navigationSafeArgsKotlin)
+    id(Plugins.kotlinKapt)
     id(Plugins.daggerHiltAndroidPlugin)
 }
 
@@ -11,13 +10,8 @@ android {
     compileSdk = ConfigData.compileSdk
 
     defaultConfig {
-        applicationId = ConfigData.applicationId
         minSdk = ConfigData.minSdk
         targetSdk = ConfigData.targetSdk
-        versionCode = ConfigData.versionCode
-        versionName = ConfigData.versionName
-
-        testInstrumentationRunner = ConfigData.testInstrumentationRunner
     }
 
     buildTypes {
@@ -27,9 +21,9 @@ android {
         }
     }
 
-    buildFeatures {
-        dataBinding = ConfigData.dataBinding
-    }
+//    buildFeatures {
+//        dataBinding = ConfigData.dataBinding
+//    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -39,6 +33,10 @@ android {
     kotlinOptions {
         jvmTarget = ConfigData.jvmTarget
     }
+
+    configurations.all {
+        exclude("org.jetbrains.kotlin", "kotlin-parcelize-runtime")
+    }
 }
 
 dependencies {
@@ -46,10 +44,7 @@ dependencies {
     implementation(AppDependencies.commonImplementationLibraries)
     kapt(AppDependencies.commonKaptLibraries)
 
-    implementation(project(Modules.data))
-    implementation(project(Modules.common))
-
-    // Test Libraries
+//    // Test Libraries
     testImplementation(AppDependencies.testLibraries)
     androidTestImplementation(AppDependencies.androidTestLibraries)
 }
