@@ -7,7 +7,7 @@ import android.util.Log
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import com.example.common.utils.extentions.connectivityManager
-import com.example.common.commonimpl.NetworkStatusListenerHelper
+import com.example.data.base.commonimpl.NetworkStatusListenerHelper
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject

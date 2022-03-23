@@ -1,7 +1,7 @@
 package com.example.data.base.repository
 
 import android.content.Context
-import com.example.common.commonimpl.NetworkStatusListenerHelper
+import com.example.data.base.commonimpl.NetworkStatusListenerHelper
 import com.example.data.base.models.ErrorResponse
 import com.example.data.base.models.FailureType
 import com.example.data.base.models.DataWrapper

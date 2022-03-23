@@ -1,6 +1,7 @@
 package com.example.common.utils.extentions
 
 import android.os.Bundle
+import com.example.data.features.recipes.models.RecipesResult
 
 fun <T> Bundle.put(key: String, value: T) {
     when (value) {
@@ -15,7 +16,7 @@ fun <T> Bundle.put(key: String, value: T) {
         is CharArray -> putCharArray(key, value)
         is CharSequence -> putCharSequence(key, value)
         is Float -> putFloat(key, value)
-//        is RecipesResult -> putParcelable(key, value)
+        is RecipesResult -> putParcelable(key, value)
         else -> throw IllegalStateException("Type of property $key is not supported")
     }
 }

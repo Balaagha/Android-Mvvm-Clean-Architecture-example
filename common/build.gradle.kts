@@ -44,6 +44,8 @@ dependencies {
     implementation(AppDependencies.commonImplementationLibraries)
     kapt(AppDependencies.commonKaptLibraries)
 
+    implementation(project(Modules.data))
+
 //    // Test Libraries
     testImplementation(AppDependencies.testLibraries)
     androidTestImplementation(AppDependencies.androidTestLibraries)

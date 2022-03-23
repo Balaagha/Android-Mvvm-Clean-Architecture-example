@@ -1,7 +1,7 @@
 package com.example.androidmvvmcleanarchitectureexample.di
 
 import com.example.common.utils.helper.NetworkStatusListenerHelperImpl
-import com.example.common.commonimpl.NetworkStatusListenerHelper
+import com.example.data.base.commonimpl.NetworkStatusListenerHelper
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

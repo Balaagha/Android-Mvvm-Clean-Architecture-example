@@ -22,7 +22,7 @@ import com.example.androidmvvmcleanarchitectureexample.util.NetworkResult
 import com.example.common.utils.extentions.observeOnce
 import com.example.androidmvvmcleanarchitectureexample.viewmodels.MainViewModel
 import com.example.androidmvvmcleanarchitectureexample.viewmodels.RecipesViewModel
-import com.example.common.commonimpl.NetworkStatusListenerHelper
+import com.example.data.base.commonimpl.NetworkStatusListenerHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
