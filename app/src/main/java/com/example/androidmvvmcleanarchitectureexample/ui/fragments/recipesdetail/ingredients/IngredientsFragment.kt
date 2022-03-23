@@ -10,8 +10,8 @@ import com.example.androidmvvmcleanarchitectureexample.R
 import com.example.androidmvvmcleanarchitectureexample.adapters.IngredientsAdapter
 import com.example.androidmvvmcleanarchitectureexample.util.Bundles.RECIPE_RESULT_KEY
 import kotlinx.android.synthetic.main.fragment_ingredients.view.*
-import com.example.androidmvvmcleanarchitectureexample.models.RecipesResult
 import com.example.common.utils.helper.argument
+import com.example.data.features.recipes.models.RecipesResult
 
 class IngredientsFragment : Fragment() {
 

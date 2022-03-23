@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidmvvmcleanarchitectureexample.databinding.RecipesRowLayoutBinding
-import com.example.androidmvvmcleanarchitectureexample.models.FoodRecipe
-import com.example.androidmvvmcleanarchitectureexample.models.RecipesResult
 import com.example.androidmvvmcleanarchitectureexample.util.RecipesDiffUtil
+import com.example.data.features.recipes.models.FoodRecipe
+import com.example.data.features.recipes.models.RecipesResult
 
 class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.MyViewHolder>() {
 

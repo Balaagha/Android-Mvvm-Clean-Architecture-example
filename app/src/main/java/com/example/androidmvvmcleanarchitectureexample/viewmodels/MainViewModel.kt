@@ -7,8 +7,8 @@ import android.net.NetworkCapabilities
 import androidx.lifecycle.*
 import com.example.androidmvvmcleanarchitectureexample.data.Repository
 import com.example.androidmvvmcleanarchitectureexample.data.database.receiptui.RecipesEntity
-import com.example.androidmvvmcleanarchitectureexample.models.FoodRecipe
 import com.example.androidmvvmcleanarchitectureexample.util.NetworkResult
+import com.example.data.features.recipes.models.FoodRecipe
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

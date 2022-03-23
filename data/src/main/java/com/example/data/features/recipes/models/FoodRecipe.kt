@@ -1,9 +1,15 @@
-package com.example.androidmvvmcleanarchitectureexample.models
+package com.example.data.features.recipes.models
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
+
+data class FoodRecipe(
+    @SerializedName("results")
+    val recipesResults: List<RecipesResult>
+)
+
 
 @Parcelize
 data class RecipesResult(
@@ -37,4 +43,21 @@ data class RecipesResult(
     val vegetarian: Boolean,
     @SerializedName("veryHealthy")
     val veryHealthy: Boolean,
+): Parcelable
+
+
+@Parcelize
+data class ExtendedIngredient(
+    @SerializedName("amount")
+    val amount: Double?,
+    @SerializedName("consistency")
+    val consistency: String?,
+    @SerializedName("image")
+    val image: String?,
+    @SerializedName("name")
+    val name: String?,
+    @SerializedName("original")
+    val original: String?,
+    @SerializedName("unit")
+    val unit: String?
 ): Parcelable

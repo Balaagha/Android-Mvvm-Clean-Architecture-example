@@ -11,8 +11,8 @@ import androidx.navigation.findNavController
 import coil.load
 import com.example.androidmvvmcleanarchitectureexample.R
 import com.example.androidmvvmcleanarchitectureexample.ui.fragments.recipes.RecipesFragmentDirections
+import com.example.data.features.recipes.models.RecipesResult
 import java.lang.Exception
-import com.example.androidmvvmcleanarchitectureexample.models.RecipesResult
 import org.jsoup.Jsoup
 
 class RecipesRowBinding {

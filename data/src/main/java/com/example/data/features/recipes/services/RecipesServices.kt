@@ -1,11 +1,11 @@
-package com.example.androidmvvmcleanarchitectureexample.data.network
+package com.example.data.features.recipes.services
 
-import com.example.androidmvvmcleanarchitectureexample.models.FoodRecipe
+import com.example.data.features.recipes.models.FoodRecipe
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.QueryMap
 
-interface FoodRecipesApi {
+interface RecipesServices {
 
     @GET("/recipes/complexSearch")
     suspend fun getRecipes(

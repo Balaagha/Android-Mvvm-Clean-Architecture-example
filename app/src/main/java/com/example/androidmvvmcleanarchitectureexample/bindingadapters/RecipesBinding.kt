@@ -5,8 +5,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.androidmvvmcleanarchitectureexample.data.database.receiptui.RecipesEntity
-import com.example.androidmvvmcleanarchitectureexample.models.FoodRecipe
 import com.example.androidmvvmcleanarchitectureexample.util.NetworkResult
+import com.example.data.features.recipes.models.FoodRecipe
 
 class RecipesBinding {
 

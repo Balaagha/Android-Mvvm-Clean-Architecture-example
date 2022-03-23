@@ -42,7 +42,7 @@
         tools:layout="@layout/activity_details" >
         <argument
             android:name="result"
-            app:argType="com.example.androidmvvmcleanarchitectureexample.models.RecipesResult" />
+            app:argType="com.example.data.features.recipes.models.RecipesResult" />
     </activity>
 
     <fragment

@@ -3,7 +3,7 @@ package com.example.androidmvvmcleanarchitectureexample.data.database.receiptui
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.androidmvvmcleanarchitectureexample.data.database.common.DatabaseConstant.RECIPES_TABLE
-import com.example.androidmvvmcleanarchitectureexample.models.FoodRecipe
+import com.example.data.features.recipes.models.FoodRecipe
 
 @Entity(tableName = RECIPES_TABLE)
 class RecipesEntity(

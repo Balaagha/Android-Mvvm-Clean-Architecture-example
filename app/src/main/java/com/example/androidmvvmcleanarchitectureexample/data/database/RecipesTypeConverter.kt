@@ -1,7 +1,7 @@
 package com.example.androidmvvmcleanarchitectureexample.data.database
 
 import androidx.room.TypeConverter
-import com.example.androidmvvmcleanarchitectureexample.models.FoodRecipe
+import com.example.data.features.recipes.models.FoodRecipe
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
