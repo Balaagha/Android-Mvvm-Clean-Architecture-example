@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.base.models.DataWrapper
 import com.example.data.base.models.FailureBehavior
-import com.example.data.base.usecase.BaseUseCase
+import com.example.data.base.usecase.BaseUseCaseForNetwork
 import com.example.common.utils.helper.SingleLiveEvent
 import com.example.core.event.BaseUiEvent
 import kotlinx.coroutines.*
@@ -32,7 +32,7 @@ class BaseViewModel(
     }
 
     @InternalCoroutinesApi
-    protected fun <T, R> BaseUseCase<T, R>.execute(
+    protected fun <T, R> BaseUseCaseForNetwork<T, R>.execute(
         params: R,
         successOperation: (() -> Unit)? = null,
         failOperation: (() -> Unit)? = null,

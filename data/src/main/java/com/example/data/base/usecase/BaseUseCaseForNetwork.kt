@@ -4,6 +4,7 @@ import com.example.data.R
 import com.example.data.base.models.DataWrapper
 import com.example.data.base.models.FailureBehavior
 import com.example.data.base.models.FailureType
+import com.example.data.base.models.RequestWrapper
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +13,14 @@ import retrofit2.Response
 import java.util.concurrent.CancellationException
 import java.util.concurrent.atomic.AtomicBoolean
 
-abstract class BaseUseCase <ResponseType, in RequestParams> {
+abstract class BaseUseCaseForNetwork <ResponseType, in RequestParams> {
+
+    open val customHeaders = HashMap<String, String>()
+
+    fun withHeader(headers: HashMap<String, String>): BaseUseCaseForNetwork<ResponseType, RequestParams> {
+        this.customHeaders.putAll(headers)
+        return this
+    }
 
     /**
      * [isCurrentUseCaseBusy] is responsible for detect current use case have progress operation
@@ -148,6 +156,14 @@ abstract class BaseUseCase <ResponseType, in RequestParams> {
             }
         }
     }
+
+    protected val <T> T.asRequestWrapper: RequestWrapper<T>
+        get() {
+            return RequestWrapper(
+                requestValue = this,
+                customHeaders = this@BaseUseCaseForNetwork.customHeaders
+            )
+        }
 
     companion object {
         const val exceptionMessage = "UseCase in use"
