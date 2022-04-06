@@ -44,6 +44,10 @@ object AppDependencies {
         add(Shimmer.shimmer)
         add(Shimmer.shimmerRecyclerView)
 
+        add(WorkManager.workRuntime)
+        add(WorkManager.workRuntimeKtx)
+        add(WorkManager.workGcm)
+
         add(Jsoup.jsoup)
 
     }
@@ -169,6 +173,20 @@ object AppDependencies {
         const val junit = "androidx.test.ext:junit:1.1.3"
         const val espressoCore = "androidx.test.espresso:espresso-core:3.4.0"
         const val roomTesting = "androidx.room:room-testing:2.2.5"
+    }
+
+    object WorkManager {
+        val work_version = "2.2.0"
+
+        // (Java only)
+        val workRuntime = "androidx.work:work-runtime:$work_version"
+
+        // Kotlin + coroutines
+        val workRuntimeKtx =  "androidx.work:work-runtime-ktx:$work_version"
+
+        // optional - GCMNetworkManager support
+        val workGcm = "androidx.work:work-gcm:$work_version"
+
     }
 
 }
