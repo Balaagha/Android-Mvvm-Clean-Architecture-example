@@ -5,102 +5,88 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.lifecycle.*
-import com.example.androidmvvmcleanarchitectureexample.data.Repository
-import com.example.androidmvvmcleanarchitectureexample.data.database.receiptui.RecipesEntity
-import com.example.androidmvvmcleanarchitectureexample.util.NetworkResult
+import com.example.core.viewmodel.BaseViewModel
+import com.example.data.base.models.DataWrapper
+import com.example.data.database.feature.recipes.model.RecipesEntity
+import com.example.data.database.feature.recipes.usecase.GetReceiptListDataUseCase
+import com.example.data.database.feature.recipes.usecase.SaveReceiptListDataUseCase
 import com.example.data.features.recipes.models.FoodRecipe
+import com.example.data.features.recipes.usecase.GetRecipesUseCase
+import com.example.data.features.recipes.usecase.SearchRecipesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.launch
-import retrofit2.Response
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val repository: Repository,
-    application: Application
-) : AndroidViewModel(application) {
-
+    private val getRecipesUseCase: GetRecipesUseCase,
+    private val searchRecipesUseCase: SearchRecipesUseCase,
+    getReceiptListDataUseCase: GetReceiptListDataUseCase,
+    private val saveReceiptListDataUseCase: SaveReceiptListDataUseCase,
+    application: Application,
+    savedStateHandle: SavedStateHandle
+) : BaseViewModel(savedStateHandle, application) {
 
     /** ROOM DATABASE */
-
-    val readRecipes: LiveData<List<RecipesEntity>> = repository.local.readDatabase().asLiveData()
-
-    private fun insertRecipes(recipesEntity: RecipesEntity) =
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.local.insertRecipes(recipesEntity)
-        }
+    val readRecipes: LiveData<List<RecipesEntity>> = getReceiptListDataUseCase.invoke().asLiveData()
 
     /** RETROFIT */
-    var recipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
-    var searchedRecipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
+    var recipesResponse: MutableLiveData<DataWrapper<FoodRecipe>> = MutableLiveData()
+    var searchedRecipesResponse: MutableLiveData<DataWrapper<FoodRecipe>> = MutableLiveData()
 
     fun getRecipes(queries: Map<String, String>) = viewModelScope.launch {
-        getRecipesSafeCall(queries)
-    }
+        getRecipesUseCase.execute(
+            params = queries,
+            successOperation = {
 
-    fun searchRecipes(searchQuery: Map<String, String>) = viewModelScope.launch {
-        searchRecipesSafeCall(searchQuery)
-    }
+            },
+            failOperation = {
 
-    private suspend fun getRecipesSafeCall(queries: Map<String, String>) {
-        recipesResponse.value = NetworkResult.Loading()
+            }
+        ){ 
+            recipesResponse.value = it
+            it.let {
+
+            }
+        }
+        recipesResponse.value = DataWrapper.Loading()
         if (hasInternetConnection()) {
-            try {
-                val response = repository.remote.getRecipes(queries)
-                recipesResponse.value = handleFoodRecipesResponse(response)
 
-                val foodRecipe = recipesResponse.value!!.data
-                if(foodRecipe != null) {
-                    offlineCacheRecipes(foodRecipe)
+            try {
+                recipesResponse.value = getRecipesUseCase.invoke(queries)
+                recipesResponse.value?.invoke()?.let {
+                    offlineCacheRecipes(it)
                 }
             } catch (e: Exception) {
-                recipesResponse.value = NetworkResult.Error("Recipes not found.")
+                recipesResponse.value = DataWrapper.Failure(message = "Recipes not found.")
             }
         } else {
-            recipesResponse.value = NetworkResult.Error("No Internet Connection.")
+            recipesResponse.value = DataWrapper.Failure(message = "No Internet Connection")
         }
     }
 
-    private suspend fun searchRecipesSafeCall(searchQuery: Map<String, String>) {
-        searchedRecipesResponse.value = NetworkResult.Loading()
+
+    fun searchRecipes(searchQuery: Map<String, String>) = viewModelScope.launch {
+        searchedRecipesResponse.value = DataWrapper.Loading()
         if (hasInternetConnection()) {
             try {
-                val response = repository.remote.searchRecipes(searchQuery)
-                searchedRecipesResponse.value = handleFoodRecipesResponse(response)
+                searchedRecipesResponse.value = searchRecipesUseCase.invoke(searchQuery)
             } catch (e: Exception) {
-                searchedRecipesResponse.value = NetworkResult.Error("Recipes not found.")
+                searchedRecipesResponse.value = DataWrapper.Failure(message = "Recipes not found.")
             }
         } else {
-            searchedRecipesResponse.value = NetworkResult.Error("No Internet Connection.")
+            searchedRecipesResponse.value = DataWrapper.Failure(message = "No Internet Connection.")
         }
     }
 
 
     private fun offlineCacheRecipes(foodRecipe: FoodRecipe) {
-        val recipesEntity = RecipesEntity(foodRecipe)
-        insertRecipes(recipesEntity)
-    }
-
-    private fun handleFoodRecipesResponse(response: Response<FoodRecipe>): NetworkResult<FoodRecipe> {
-        when {
-            response.message().toString().contains("timeout") -> {
-                return NetworkResult.Error("Timeout")
-            }
-            response.code() == 402 -> {
-                return NetworkResult.Error("API Key Limited.")
-            }
-            response.body()!!.recipesResults.isNullOrEmpty() -> {
-                return NetworkResult.Error("Recipes not found.")
-            }
-            response.isSuccessful -> {
-                val foodRecipes = response.body()
-                return NetworkResult.Success(foodRecipes!!)
-            }
-            else -> {
-                return NetworkResult.Error(response.message())
-            }
+        viewModelScope.launch(Dispatchers.IO) {
+            saveReceiptListDataUseCase.invoke(
+                RecipesEntity(foodRecipe)
+            )
         }
     }
 
