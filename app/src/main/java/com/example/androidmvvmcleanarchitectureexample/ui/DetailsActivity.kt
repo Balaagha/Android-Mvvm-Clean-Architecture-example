@@ -66,7 +66,7 @@ class DetailsActivity : AppCompatActivity() {
         fragments.add(InstructionsFragment())
 
         val resultBundle = Bundle()
-//        resultBundle.putParcelable(RECIPE_RESULT_KEY, args.result)
+        resultBundle.putParcelable(RECIPE_RESULT_KEY, args.result)
         resultBundle.put(RECIPE_RESULT_KEY, args.result)
         val adapter = PagerAdapter(this, resultBundle, fragments)
 

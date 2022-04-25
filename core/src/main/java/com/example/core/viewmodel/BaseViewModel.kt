@@ -1,5 +1,7 @@
 package com.example.core.viewmodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,9 +16,10 @@ import kotlinx.coroutines.flow.*
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
-class BaseViewModel(
-    val savedStateHandle: SavedStateHandle?
-) : ViewModel() {
+open class BaseViewModel(
+    val savedStateHandle: SavedStateHandle?,
+    application: Application
+) : AndroidViewModel(application) {
 
     /**
      * For triggering base events on UI
@@ -31,12 +34,11 @@ class BaseViewModel(
 //        Timber.e(throwable)
     }
 
-    @InternalCoroutinesApi
     protected fun <T, R> BaseUseCaseForNetwork<T, R>.execute(
         params: R,
         successOperation: (() -> Unit)? = null,
         failOperation: (() -> Unit)? = null,
-        block: (() -> Unit)? = null
+        block: ((value: DataWrapper<T>) -> Unit)? = null
     ) {
         launchSafe {
             this@execute.invokeAsFlow(params).collect {
@@ -63,7 +65,7 @@ class BaseViewModel(
                     }
                 }
 
-                block?.invoke()
+                block?.invoke(it)
             }
         }
     }

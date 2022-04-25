@@ -41,6 +41,7 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
         val mView = inflater.inflate(R.layout.recipes_bottom_sheet, container, false)
 
         recipesViewModel.readMealAndDietType.asLiveData().observe(viewLifecycleOwner, { value ->
+            Log.d("TAG","value => $value")
             mealTypeChip = value.selectedMealType
             dietTypeChip = value.selectedDietType
             updateChip(value.selectedMealTypeId, mView.mealType_chipGroup)
@@ -68,9 +69,9 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
                 dietTypeChip,
                 dietTypeChipId
             )
-            val action =
-                RecipesBottomSheetDirections.actionRecipesBottomSheetToRecipesFragment(true)
-            findNavController().navigate(action)
+//            val action =
+//                RecipesBottomSheetDirections.actionRecipesBottomSheetToRecipesFragment(true)
+//            findNavController().navigate(action)
         }
 
         return mView

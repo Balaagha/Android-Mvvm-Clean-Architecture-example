@@ -7,34 +7,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
+import com.example.core.helper.viewDataBinding
 
 abstract class BaseFragment<ViewDataBindingType : ViewDataBinding>(@LayoutRes val layoutId: Int) : DialogFragment() {
 
-    private var _binding: ViewDataBindingType? = null
-    protected val binding: ViewDataBindingType get() = _binding as ViewDataBindingType
+    /**
+     * View data binding
+     */
+    open val binding: ViewDataBindingType by viewDataBinding(::onInternalPreDestroyView)
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        if (_binding == null)
-            throw IllegalArgumentException("Binding cannot be null")
-        binding.lifecycleOwner = viewLifecycleOwner
-        return binding.root
+        return inflater.inflate(layoutId, container, false)
     }
 
-    override fun onDestroy() {
-        _binding = null
-        super.onDestroy()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     /**
-     * it is for hiding keyboard
+     * This method is for hiding keyboard
      */
     fun hideKeyboard() {
         try {
@@ -45,4 +43,19 @@ abstract class BaseFragment<ViewDataBindingType : ViewDataBinding>(@LayoutRes va
 //            Timber.e(e, "exception occurred at hide keyboard")
         }
     }
+
+    internal open fun onInternalPreDestroyView() {
+        // Expose method for inheritance
+        onPreDestroyView()
+    }
+
+    /**
+     * This method is called before destroying data binding
+     */
+    open fun onPreDestroyView() {
+        // NoImpl
+    }
+
+
+
 }

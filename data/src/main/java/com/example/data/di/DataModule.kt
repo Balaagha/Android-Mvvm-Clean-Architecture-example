@@ -37,13 +37,19 @@ open class DataModule {
     @Provides
     fun provideOkHttpClient(
         httpLoggingInterceptor: HttpLoggingInterceptor,
-        ) : OkHttpClient {
+    ): OkHttpClient {
 
-        val client = OkHttpClient.Builder().apply {
-            readTimeout(15, TimeUnit.SECONDS)
-            connectTimeout(15, TimeUnit.SECONDS)
-            addInterceptor(httpLoggingInterceptor)
-        }
+//        val client = OkHttpClient.Builder().apply {
+//            readTimeout(15, TimeUnit.SECONDS)
+//            connectTimeout(15, TimeUnit.SECONDS)
+//            addInterceptor(httpLoggingInterceptor)
+//        }
+        val client = OkHttpClient.Builder()
+        client.addInterceptor(httpLoggingInterceptor)
+
+        client.readTimeout(15, TimeUnit.SECONDS)
+            .connectTimeout(15, TimeUnit.SECONDS)
+            .writeTimeout(15, TimeUnit.SECONDS)
 
         return client.build()
     }
@@ -58,12 +64,12 @@ open class DataModule {
     @Provides
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
-        gsonConverterFactory: GsonConverterFactory
+        gsonConverterFactory: GsonConverterFactory,
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(gsonConverterFactory)
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
@@ -75,7 +81,7 @@ open class DataModule {
     @Singleton
     @Provides
     fun provideRecipesServices(
-        retrofit: Retrofit
+        retrofit: Retrofit,
     ): RecipesServices {
         return retrofit.create(RecipesServices::class.java)
     }

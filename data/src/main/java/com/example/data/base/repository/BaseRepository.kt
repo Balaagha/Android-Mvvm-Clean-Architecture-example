@@ -38,11 +38,11 @@ open class BaseRepository(
     suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): DataWrapper<Response<T>> {
         return try {
             if(networkStatusListenerHelper.getNetworkAvailabilityStatus()){
-                DataWrapper.Failure(FailureType.NO_INTERNET_CONNECTION)
-            } else {
                 DataWrapper.Success(
                     value = apiCall.invoke()
                 )
+            } else {
+                DataWrapper.Failure(FailureType.NO_INTERNET_CONNECTION)
             }
         } catch (throwable: Throwable) {
             handleApiCallException(throwable)

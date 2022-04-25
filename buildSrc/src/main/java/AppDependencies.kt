@@ -50,6 +50,10 @@ object AppDependencies {
 
         add(Jsoup.jsoup)
 
+        add(Animation.lottie)
+
+        add(Glide.glideImpl)
+
     }
 
     val commonKaptLibraries = arrayListOf<String>().apply {
@@ -61,6 +65,10 @@ object AppDependencies {
 
         add(Room.roomCompilerKaptProcessor)
 
+    }
+
+    val commonAnnotationProcessorLibraries = arrayListOf<String>().apply {
+        add(Glide.glideCompiler)
     }
 
     val testLibraries = arrayListOf<String>().apply {
@@ -76,6 +84,10 @@ object AppDependencies {
         add(AndroidTestImplementationLibraries.espressoCore)
         add(AndroidTestImplementationLibraries.junit)
         add(AndroidTestImplementationLibraries.roomTesting)
+    }
+
+    object Animation {
+        const val lottie = "com.airbnb.android:lottie:2.6.0"
     }
 
     object AppCompat {
@@ -146,6 +158,11 @@ object AppDependencies {
         const val coilBase = "io.coil-kt:coil-base:${Versions.coilVersion}"
     }
 
+    object Glide {
+        const val glideImpl = "com.github.bumptech.glide:glide:4.8.0"
+        const val glideCompiler = "com.github.bumptech.glide:compiler:4.8.0"
+    }
+
     object Network {
         const val retrofit2 = "com.squareup.retrofit2:retrofit:2.9.0"
         const val retrofit2ConverterGson = "com.squareup.retrofit2:converter-gson:2.9.0"
@@ -192,20 +209,23 @@ object AppDependencies {
 }
 
 
-
-
-fun DependencyHandler.kapt(list: List<String>) {
-    list.forEach { dependency ->
-        add("kapt", dependency)
-    }
-}
-
 fun DependencyHandler.implementation(list: List<String>) {
     list.forEach { dependency ->
         add("implementation", dependency)
     }
 }
 
+fun DependencyHandler.annotationProcessor(list: List<String>) {
+    list.forEach { dependency ->
+        add("annotationProcessor", dependency)
+    }
+}
+
+fun DependencyHandler.kapt(list: List<String>) {
+    list.forEach { dependency ->
+        add("kapt", dependency)
+    }
+}
 
 fun DependencyHandler.androidTestImplementation(list: List<String>) {
     list.forEach { dependency ->

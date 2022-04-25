@@ -33,14 +33,14 @@ abstract class BaseUseCaseForNetwork <ResponseType, in RequestParams> {
     internal abstract suspend fun run(params: RequestParams): DataWrapper<Response<ResponseType>>
 
     suspend operator fun invoke(params: RequestParams): DataWrapper<ResponseType> {
-        return parseApiResponse(run(params))
+        return parseResult(run(params))
     }
 
     /**
      * It is for reactive execution. Firstly flow return Loading state
      * After return Loading state, use case check api response, and return Failure or Success response
      * [isCurrentUseCaseBusy] is guaranteed use not have progress operation
-     * [parseApiResponse] is generic class for handle response. If you have other logic, you can override it your own use case
+     * [parseResult] is generic class for handle response. If you have other logic, you can override it your own use case
      */
     fun invokeAsFlow(
         params: RequestParams
@@ -56,7 +56,7 @@ abstract class BaseUseCaseForNetwork <ResponseType, in RequestParams> {
 
             // Execute api call
             val apiResult = run(params)
-            val parsedResult = parseApiResponse(apiResult)
+            val parsedResult = parseResult(apiResult)
 
             // Emit parsed api result
             emit(parsedResult)
@@ -74,7 +74,7 @@ abstract class BaseUseCaseForNetwork <ResponseType, in RequestParams> {
         }
     }
 
-    open fun parseApiResponse(data: DataWrapper<Response<ResponseType>>): DataWrapper<ResponseType> {
+    open fun parseResult(data: DataWrapper<Response<ResponseType>>): DataWrapper<ResponseType> {
         return when (data) {
             is DataWrapper.Success -> {
                 when(val code = data.invoke()?.code()) {

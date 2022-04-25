@@ -3,9 +3,9 @@ package com.example.androidmvvmcleanarchitectureexample.viewmodels
 import android.app.Application
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.androidmvvmcleanarchitectureexample.data.DataStoreRepository
 import com.example.androidmvvmcleanarchitectureexample.util.Constants.Companion.API_KEY
 import com.example.androidmvvmcleanarchitectureexample.util.Constants.Companion.DEFAULT_DIET_TYPE
 import com.example.androidmvvmcleanarchitectureexample.util.Constants.Companion.DEFAULT_MEAL_TYPE
@@ -17,16 +17,25 @@ import com.example.androidmvvmcleanarchitectureexample.util.Constants.Companion.
 import com.example.androidmvvmcleanarchitectureexample.util.Constants.Companion.QUERY_NUMBER
 import com.example.androidmvvmcleanarchitectureexample.util.Constants.Companion.QUERY_SEARCH
 import com.example.androidmvvmcleanarchitectureexample.util.Constants.Companion.QUERY_TYPE
+import com.example.core.viewmodel.BaseViewModel
+import com.example.data.features.common.usecase.GetBackOnlineStatus
+import com.example.data.features.common.usecase.GetMealAndDietType
+import com.example.data.features.common.usecase.SaveBackOnlineStatus
+import com.example.data.features.common.usecase.SaveMealAndDietType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlinx.coroutines.flow.collect
 
 @HiltViewModel
 class RecipesViewModel @Inject constructor(
     application: Application,
-    private val dataStoreRepository: DataStoreRepository
+    getBackOnlineStatus: GetBackOnlineStatus,
+    private val saveBackOnlineStatus: SaveBackOnlineStatus,
+    getMealAndDietType: GetMealAndDietType,
+    private val saveMealAndDietType: SaveMealAndDietType,
+    savedStateHandle: SavedStateHandle
 ) : AndroidViewModel(application) {
 
     private var mealType = DEFAULT_MEAL_TYPE
@@ -35,17 +44,17 @@ class RecipesViewModel @Inject constructor(
     var networkStatus = false
     var backOnline = false
 
-    val readMealAndDietType = dataStoreRepository.readMealAndDietType
-    val readBackOnline = dataStoreRepository.readBackOnline.asLiveData()
+    val readMealAndDietType = getMealAndDietType.invoke()
+    val readBackOnline = getBackOnlineStatus.invoke().asLiveData()
 
     fun saveMealAndDietType(mealType: String, mealTypeId: Int, dietType: String, dietTypeId: Int) =
         viewModelScope.launch(Dispatchers.IO) {
-            dataStoreRepository.saveMealAndDietType(mealType, mealTypeId, dietType, dietTypeId)
+            saveMealAndDietType.invoke(mealType, mealTypeId, dietType, dietTypeId)
         }
 
     private fun saveBackOnline(backOnline: Boolean) =
         viewModelScope.launch(Dispatchers.IO) {
-            dataStoreRepository.saveBackOnline(backOnline)
+            saveBackOnlineStatus.invoke(backOnline)
         }
 
     fun applyQueries(): HashMap<String, String> {

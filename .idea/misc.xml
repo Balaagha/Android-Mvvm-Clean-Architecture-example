@@ -13,6 +13,8 @@
         <entry key="app/src/main/res/layout-night/fragment_food_joke.xml" value="0.41794871794871796" />
         <entry key="app/src/main/res/layout/activity_details.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/dialog_custom_image_loading_popup.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/dialog_lottie_loading_popup.xml" value="0.1712962962962963" />
         <entry key="app/src/main/res/layout/fragment_favorite_recipes.xml" value="0.41794871794871796" />
         <entry key="app/src/main/res/layout/fragment_food_joke.xml" value="0.41794871794871796" />
         <entry key="app/src/main/res/layout/fragment_ingredients.xml" value="0.24427083333333333" />
@@ -20,6 +22,7 @@
         <entry key="app/src/main/res/layout/fragment_overview.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_recipes.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/ingredients_row_layout.xml" value="0.4064814814814815" />
+        <entry key="app/src/main/res/layout/layout_my_custom_loading.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/placeholder_row_layout.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/recipes_bottom_sheet.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/recipes_row_layout.xml" value="0.24427083333333333" />
@@ -30,6 +33,8 @@
         <entry key="app/src/main/res/menu/food_joke_menu.xml" value="0.41794871794871796" />
         <entry key="app/src/main/res/menu/recipes_menu.xml" value="0.41794871794871796" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.4338461538461538" />
+        <entry key="uitoolkit/src/main/res/layout/dialog_custom_image_loading_popup.xml" value="0.24427083333333333" />
+        <entry key="uitoolkit/src/main/res/layout/dialog_lottie_loading_popup.xml" value="0.24427083333333333" />
       </map>
     </option>
   </component>

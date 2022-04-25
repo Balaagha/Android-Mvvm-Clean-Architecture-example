@@ -1,6 +1,7 @@
 package com.example.data.features.recipes.repository
 
 import android.content.Context
+import android.util.Log
 import com.example.data.base.models.DataWrapper
 import com.example.data.base.models.RequestWrapper
 import com.example.data.base.repository.BaseRepository
@@ -26,9 +27,11 @@ class RecipesRepositoryImpl @Inject constructor(
 ) : BaseRepository(context),RecipesRepository {
 
     override suspend fun getRecipes(requestData: RequestWrapper<Map<String, String>>): DataWrapper<Response<FoodRecipe>> {
-        return safeApiCall {
-            recipesServices.getRecipes(requestData.requestValue)
-        }
+        val data = recipesServices.getRecipes(requestData.requestValue)
+        Log.d("myTagRepo","data => $data")
+        return DataWrapper.Success(
+            value = data
+        )
     }
 
     override suspend fun searchRecipes(requestData: RequestWrapper<Map<String, String>>): DataWrapper <Response<FoodRecipe>> {

@@ -45,10 +45,12 @@ dependencies {
     // App Libraries
     implementation(AppDependencies.commonImplementationLibraries)
     kapt(AppDependencies.commonKaptLibraries)
+    annotationProcessor(AppDependencies.commonAnnotationProcessorLibraries)
 
     implementation(project(Modules.data))
     implementation(project(Modules.common))
     implementation(project(Modules.core))
+    implementation(project(Modules.uiToolKit))
 
     // Test Libraries
     testImplementation(AppDependencies.testLibraries)

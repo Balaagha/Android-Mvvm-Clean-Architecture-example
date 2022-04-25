@@ -7,21 +7,22 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.createViewModelLazy
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import com.example.common.utils.extentions.hideKeyboard
 import com.example.common.utils.extentions.observe
 import com.example.core.event.BaseUiEvent
 import com.example.core.viewmodel.BaseViewModel
 import kotlin.reflect.KClass
 
-abstract class BaseMvvmFragment<VB : ViewDataBinding>(
+abstract class BaseMvvmFragment<VB : ViewDataBinding,VM : BaseViewModel>(
     @LayoutRes layoutId: Int,
-    viewModelClass: KClass<BaseViewModel>,
+    viewModelClass: KClass<VM>,
 ) : BaseFragment<VB>(layoutId) {
 
     open val viewModelFactoryOwner: (() -> ViewModelStoreOwner) = { this }
 
     open val factoryProducer: ViewModelProvider.Factory by lazy { defaultViewModelProviderFactory }
 
-    open val viewModel: BaseViewModel by createViewModelLazy(
+    open val viewModel: VM by createViewModelLazy(
         viewModelClass,
         { viewModelFactoryOwner.invoke().viewModelStore },
         { factoryProducer }
@@ -58,6 +59,11 @@ abstract class BaseMvvmFragment<VB : ViewDataBinding>(
     }
 
     protected open fun showLoadingIndicatorViaBaseUiEvent(uiActionEvent: BaseUiEvent.LoadingIndicator) {
+        if (uiActionEvent.isLoadingEnable){
+            (activity as BaseActivity).showLoadingDialog()
+        } else {
+            (activity as BaseActivity).hideLoadingDialog()
+        }
         Toast.makeText(requireContext(), "BaseUiEvent.LoadingIndicator handle with state ${ uiActionEvent.isLoadingEnable}",Toast.LENGTH_SHORT).show()
     }
 

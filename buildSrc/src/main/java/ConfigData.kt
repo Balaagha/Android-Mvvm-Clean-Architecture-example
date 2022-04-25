@@ -32,4 +32,5 @@ object Modules {
     const val core = ":core"
     const val domain = ":domain"
     const val presentation = ":presentation"
+    const val uiToolKit = ":uitoolkit"
 }
