@@ -12,6 +12,8 @@ class GetRecipesUseCase @Inject constructor(
     private val recipesRepository: RecipesRepository
 ) : BaseUseCaseForNetwork<FoodRecipe, Map<String, String>>() {
 
+    override var isShowBaseLoadingIndicator = true
+
     override suspend fun run(params: Map<String, String>): DataWrapper<Response<FoodRecipe>> {
         return recipesRepository.getRecipes(params.asRequestWrapper)
     }

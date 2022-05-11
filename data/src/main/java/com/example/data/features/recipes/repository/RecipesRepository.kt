@@ -27,15 +27,15 @@ class RecipesRepositoryImpl @Inject constructor(
 ) : BaseRepository(context),RecipesRepository {
 
     override suspend fun getRecipes(requestData: RequestWrapper<Map<String, String>>): DataWrapper<Response<FoodRecipe>> {
-        val data = recipesServices.getRecipes(requestData.requestValue)
-        Log.d("myTagRepo","data => $data")
-        return DataWrapper.Success(
-            value = data
-        )
+        return safeApiCall {
+            recipesServices.getRecipes(requestData.requestValue)
+        }
     }
 
     override suspend fun searchRecipes(requestData: RequestWrapper<Map<String, String>>): DataWrapper <Response<FoodRecipe>> {
-        return safeApiCall { recipesServices.searchRecipes(requestData.requestValue) }
+        return safeApiCall {
+            recipesServices.searchRecipes(requestData.requestValue)
+        }
     }
 
 }

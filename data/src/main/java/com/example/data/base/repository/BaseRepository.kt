@@ -5,6 +5,7 @@ import com.example.data.base.commonimpl.NetworkStatusListenerHelper
 import com.example.data.base.models.ErrorResponse
 import com.example.data.base.models.FailureType
 import com.example.data.base.models.DataWrapper
+import com.example.data.base.models.FailureBehavior
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import dagger.hilt.EntryPoint
@@ -42,7 +43,10 @@ open class BaseRepository(
                     value = apiCall.invoke()
                 )
             } else {
-                DataWrapper.Failure(FailureType.NO_INTERNET_CONNECTION)
+                DataWrapper.Failure(
+                    failureType = FailureType.NO_INTERNET_CONNECTION,
+                    failureBehavior = FailureBehavior.ALERT
+                )
             }
         } catch (throwable: Throwable) {
             handleApiCallException(throwable)

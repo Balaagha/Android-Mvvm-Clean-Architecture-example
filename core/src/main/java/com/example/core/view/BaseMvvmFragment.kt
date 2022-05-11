@@ -1,6 +1,7 @@
 package com.example.core.view
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
@@ -64,10 +65,12 @@ abstract class BaseMvvmFragment<VB : ViewDataBinding,VM : BaseViewModel>(
         } else {
             (activity as BaseActivity).hideLoadingDialog()
         }
+        Log.d("myTag","loading state => ${uiActionEvent.isLoadingEnable}")
         Toast.makeText(requireContext(), "BaseUiEvent.LoadingIndicator handle with state ${ uiActionEvent.isLoadingEnable}",Toast.LENGTH_SHORT).show()
     }
 
     protected open fun showAlertViaBaseUiEvent(uiActionEvent: BaseUiEvent.Alert) {
+        Log.d("myTag","showAlertViaBaseUiEvent call")
         Toast.makeText(requireContext(), "BaseUiEvent.Alert handle with title ${ uiActionEvent.title.toString() }",Toast.LENGTH_SHORT).show()
     }
 

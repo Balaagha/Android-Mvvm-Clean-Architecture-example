@@ -36,8 +36,8 @@ open class BaseViewModel(
 
     protected fun <T, R> BaseUseCaseForNetwork<T, R>.execute(
         params: R,
-        successOperation: (() -> Unit)? = null,
-        failOperation: (() -> Unit)? = null,
+        successOperation: ((value: DataWrapper<T>) -> Unit)? = null,
+        failOperation: ((value: DataWrapper<T>) -> Unit)? = null,
         block: ((value: DataWrapper<T>) -> Unit)? = null
     ) {
         launchSafe {
@@ -47,7 +47,7 @@ open class BaseViewModel(
                 }
                 when(it){
                     is DataWrapper.Success ->{
-                        successOperation?.invoke()
+                        successOperation?.invoke(it)
                     }
                     is DataWrapper.Failure ->{
                         when (it.failureBehavior){
@@ -61,7 +61,7 @@ open class BaseViewModel(
                                 event.postValue(BaseUiEvent.Toast())
                             }
                         }
-                        failOperation?.invoke()
+                        failOperation?.invoke(it)
                     }
                 }
 
