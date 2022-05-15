@@ -5,25 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
 import com.example.androidmvvmcleanarchitectureexample.R
+import com.example.androidmvvmcleanarchitectureexample.databinding.FragmentRegisterBinding
+import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.viewmodel.EntryViewModel
+import com.example.core.view.BaseMvvmFragment
 import kotlinx.android.synthetic.main.fragment_forgot_password_mehtod_selector.*
 
 
-class ForgotPasswordMehtodSelectorFragment : Fragment() {
+class ForgotPasswordMehtodSelectorFragment : BaseMvvmFragment<FragmentRegisterBinding, EntryViewModel>(
+    R.layout.fragment_forgot_password_mehtod_selector, EntryViewModel::class
+) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_forgot_password_mehtod_selector, container, false)
+    override val viewModelFactoryOwner: () -> ViewModelStoreOwner = {
+        findNavController().getViewModelStoreOwner(R.id.nav_graph_entry)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        backBtn.setOnClickListener {
-            findNavController().navigateUp()
+        binding.apply {
+            backBtn.setOnClickListener {
+                findNavController().navigateUp()
+            }
         }
     }
 
