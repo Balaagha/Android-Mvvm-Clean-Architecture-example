@@ -1,5 +1,7 @@
 package com.example.data.di
 
+import com.example.data.features.entryflow.repository.EntryFlowRepository
+import com.example.data.features.entryflow.repository.EntryFlowRepositoryImpl
 import com.example.data.features.recipes.repository.RecipesRepository
 import com.example.data.features.recipes.repository.RecipesRepositoryImpl
 import dagger.Binds
@@ -16,5 +18,9 @@ abstract class BindModule {
     @Singleton
     @Binds
     abstract fun bindRecipesRepository(repo: RecipesRepositoryImpl): RecipesRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindEntryFlowRepository(repo: EntryFlowRepositoryImpl): EntryFlowRepository
 
 }

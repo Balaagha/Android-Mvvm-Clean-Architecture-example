@@ -27,7 +27,6 @@ class OnBoardingFragment : BaseMvvmFragment<FragmentOnBoardingBinding, EntryView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("myTag","In OnBoardingFragment, data=> ${viewModel.data}")
 
         val fragmentList = arrayListOf<Fragment>(
             OnBoardingFirstFragment(),
@@ -68,7 +67,7 @@ class OnBoardingFragment : BaseMvvmFragment<FragmentOnBoardingBinding, EntryView
                     onBoardingViewPager.currentItem = 2
                 }
                 2 -> {
-                    findNavController().navigate(R.id.action_onBoardingFragment_to_loginFragment)
+//                    findNavController().navigate(R.id.action_onBoardingFragment_to_loginFragment)
                 }
             }
         }

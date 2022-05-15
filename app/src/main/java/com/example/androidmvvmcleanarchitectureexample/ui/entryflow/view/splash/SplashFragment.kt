@@ -42,15 +42,12 @@ class SplashFragment : BaseMvvmFragment<FragmentSplashBinding, EntryViewModel>(
 
     private val runner by lazy {
         Runnable {
-            Log.d("myTag","In Splash,changed  data=> ${viewModel.data}")
             findNavController().navigate(R.id.action_splashFragment_to_onBoardingFragment)
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("myTag","In Splash, not changed data=> ${viewModel.data}")
-        viewModel.data = "Start"
         handler.postDelayed(runner, SPLASH_SCREEN_TIME)
     }
 

@@ -74,7 +74,7 @@
 
     <color name="blue_bordered_pressed">#F0F0F0</color>]
 
-    <color name="button_default_de_active">#D8E6FC</color>
+    <color name="button_default_de_active">#DFF0FF</color>
 
 
     <color name="colorOnBoardingIndicatorInactive">#72BCFE</color>

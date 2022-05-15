@@ -1,6 +1,7 @@
 package com.example.androidmvvmcleanarchitectureexample.ui.entryflow.view.register
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
@@ -33,6 +34,7 @@ class RegisterFragment : BaseMvvmFragment<FragmentRegisterBinding, EntryViewMode
         setTextChangeListener(tvUserFirstName, 5)
         setTextChangeListener(tvUserPassword, 7, tvUserRePassword)
         setTextChangeListener(tvUserRePassword, 7, tvUserPassword)
+        Log.d("myTag","RegisterFragment: email => ${viewModel.email.value}, password => ${viewModel.password.value} ")
 
     }
 

@@ -1,5 +1,6 @@
 package com.example.data.di
 
+import com.example.data.features.entryflow.services.EntryFlowServices
 import com.example.data.features.recipes.services.RecipesServices
 import dagger.Module
 import dagger.Provides
@@ -18,7 +19,7 @@ import javax.inject.Singleton
 open class DataModule {
 
     companion object {
-        const val BASE_URL = "https://api.spoonacular.com"
+        const val BASE_URL = "http://ec2-3-15-37-163.us-east-2.compute.amazonaws.com"
         const val BASE_IMAGE_URL = "https://spoonacular.com/cdn/ingredients_100x100/"
         const val API_KEY = "121e0c6ca2b047ea96baf3c27c86cefa"
     }
@@ -84,6 +85,14 @@ open class DataModule {
         retrofit: Retrofit,
     ): RecipesServices {
         return retrofit.create(RecipesServices::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideEntryFlowServices(
+        retrofit: Retrofit,
+    ): EntryFlowServices {
+        return retrofit.create(EntryFlowServices::class.java)
     }
 
     // services region end

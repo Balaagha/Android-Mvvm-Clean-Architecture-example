@@ -1,27 +1,19 @@
 package com.example.androidmvvmcleanarchitectureexample.ui.entryflow.view.login
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
 import com.example.androidmvvmcleanarchitectureexample.R
 import com.example.androidmvvmcleanarchitectureexample.databinding.FragmentLoginBinding
-import com.example.androidmvvmcleanarchitectureexample.databinding.FragmentOnBoardingBinding
-import com.example.androidmvvmcleanarchitectureexample.ui.MainActivity
+import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.utils.checkInputValidation
 import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.viewmodel.EntryViewModel
 import com.example.common.listeners.TextChangedListener
 import com.example.core.view.BaseMvvmFragment
-import com.google.android.material.textfield.TextInputLayout
-import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : BaseMvvmFragment<FragmentLoginBinding, EntryViewModel>(
     R.layout.fragment_login, EntryViewModel::class
 ) {
-
     override val viewModelFactoryOwner: () -> ViewModelStoreOwner = {
         findNavController().getViewModelStoreOwner(R.id.nav_graph_entry)
     }
@@ -51,13 +43,12 @@ class LoginFragment : BaseMvvmFragment<FragmentLoginBinding, EntryViewModel>(
                 findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordMehtodSelectorFragment)
             }
             signInBtn.setOnClickListener {
-                if (
-                    checkValidation(userMail, 5) && checkValidation(userPassword, 8)
-                ) {
-                    activity?.apply {
-                        finish()
-                        startActivity(Intent(requireContext(), MainActivity::class.java))
-                    }
+                if (checkInputValidation(userMail, 5) && checkInputValidation(userPassword, 8)) {
+                    viewModel.onSignInBtnClicked()
+//                    activity?.apply {
+//                        finish()
+//                        startActivity(Intent(requireContext(), MainActivity::class.java))
+//                    }
                 }
             }
             signUpBtn.setOnClickListener {
@@ -66,15 +57,7 @@ class LoginFragment : BaseMvvmFragment<FragmentLoginBinding, EntryViewModel>(
         }
     }
 
-    private fun checkValidation(inputLayout: TextInputLayout, minLength: Int): Boolean {
-        inputLayout.editText?.text?.let {
-            val isValid = it.length > minLength
-            inputLayout.error = if (isValid) null else "wrong input"
-            return it.length > minLength
-        } ?: run {
-            return false
-        }
-    }
+
 
 
 }

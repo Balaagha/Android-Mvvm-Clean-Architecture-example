@@ -3,6 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="viewmodel"
+            type="com.example.androidmvvmcleanarchitectureexample.ui.entryflow.viewmodel.EntryViewModel" />
+    </data>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -67,6 +75,7 @@
                     android:textFontWeight="500"
                     android:textSize="32dp" />
 
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/userMail"
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
@@ -89,7 +98,8 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="@={viewmodel.email}"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -116,7 +126,9 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPassword" />
+                        android:inputType="textPassword"
+                        android:text="@={viewmodel.password}"/>
+
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
