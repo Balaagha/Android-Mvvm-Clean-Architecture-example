@@ -58,4 +58,7 @@
     <string name="base_generic_error" >
         Error occurs, please try again!
     </string>
+
+<!--  Beso  -->
+    <string name="forgot_password"><u>forgot password</u></string>
 </resources>

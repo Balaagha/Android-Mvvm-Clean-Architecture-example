@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.login.view.onboarding.OnBoardingFragment">
+        tools:context=".ui.entryflow.view.onboarding.OnBoardingFragment">
 
 
         <androidx.viewpager2.widget.ViewPager2

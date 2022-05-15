@@ -15,6 +15,7 @@
     <color name="red">#FF4646</color>
     <color name="yellow">#FFC114</color>
     <color name="green">#00C980</color>
+    <color name="black_neutral">#060606</color>
 
     <!-- LIGHT THEME -->
 
@@ -22,13 +23,13 @@
     <color name="placeholderColor">@color/mediumGray</color>
     <color name="itemColor">@color/darker</color>
 
-    // Custom Chip Style
+<!--  c Custom Chip Style-->
     <color name="checkedChipBackgroundColor">#206200EA</color>
     <color name="chipBackgroundColor">@color/lightGray</color>
     <color name="checkedChipTextColor">@color/colorPrimary</color>
     <color name="chipTextColor">@color/darkGray</color>
 
-    // Custom CardView Style
+<!--    // Custom CardView Style-->
     <color name="strokeColor">@color/lightMediumGray</color>
     <color name="cardBackgroundColor">@color/white</color>
     <color name="cardBackgroundLightColor">#106200EA</color>
@@ -40,9 +41,44 @@
     <color name="contextualActionBarColor">@color/dark</color>
     <color name="actionBarBackgroundColor">@color/colorPrimary</color>
 
-    // Custom BottomNavigationView Style
+<!--    // Custom BottomNavigationView Style-->
     <color name="bottomNavBackground">@color/white</color>
     <color name="bottomNavItemColor">@color/darkGray</color>
     <color name="bottomNavCheckedItemColor">@color/colorPrimary</color>
+
+<!--    // Beso-->
+    <color name="background_transparent">#00FFFFFF</color>
+    <color name="background_login_flow_bottom_section">#F8F9FB</color>
+    <color name="background_on_boarding_section">#CDE7FF</color>
+    <color name="background_splash">#D1E8FD</color>
+
+    <color name="background_arrow_btn">#76BDFF</color>
+
+
+
+    <!--  Text  -->
+    <color name="text_white">#FFFFFFFF</color>
+    <color name="text_de_active">#515151</color>
+
+
+    <color name="gray_4">#BDBDBD</color>
+    <color name="gray_3">#828282</color>
+    <color name="white_gray_3">#F0F0F0</color>
+
+
+
+
+
+    <color name="blue_primary">#1F93FF</color>
+    <color name="brand_primary_pressed">#107ADB</color>
+
+    <color name="blue_bordered_pressed">#F0F0F0</color>]
+
+    <color name="button_default_de_active">#D8E6FC</color>
+
+
+    <color name="colorOnBoardingIndicatorInactive">#72BCFE</color>
+    <color name="de_active_grey">#C4C4CC</color>
+
 
 </resources>
