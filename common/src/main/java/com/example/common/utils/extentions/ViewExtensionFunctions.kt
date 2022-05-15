@@ -1,21 +1,88 @@
 package com.example.common.utils.extentions
 
 import android.content.Context
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
+import android.graphics.PorterDuff
+import android.os.Build
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import coil.load
+import com.example.common.listeners.TextChangedListener
+import com.example.common.utils.helper.isVersionHigherAndEqual
 import com.google.android.material.textview.MaterialTextView
 
 
+fun Window.setStatusBarColorAnyVersion(color: Int) {
+    if (isVersionHigherAndEqual(Build.VERSION_CODES.M)) {
+        this.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        this.statusBarColor = ContextCompat.getColor(this.context, color)
+    } else {
+        this.statusBarColor = ContextCompat.getColor(this.context, color)
+    }
+}
+
+/**
+ * This Kotlin extension function is responsible to add text changes more efficiently
+ * @param afterTextChanged is lambda value which will invoke after changes happened
+ */
+
 // Text region
+
+
+fun EditText.onTextChanged(afterTextChanged: (String) -> Unit) {
+    this.addTextChangedListener(object : TextChangedListener {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            //not used
+        }
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            //not used
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            afterTextChanged.invoke(s.toString())
+        }
+    })
+}
+
+/**
+ * This Kotlin extension function is responsible to setLeftDrawable on EditText
+ */
+fun EditText.setLeftDrawable(
+    @DrawableRes id: Int = 0,
+    size: Int = 0,
+    @ColorRes colorRes: Int = 0,
+    padding: Int = 0
+) {
+    val drawable = ContextCompat.getDrawable(context, id)
+    if (size != 0) {
+        drawable?.setBounds(0, 0, size, size)
+    }
+    if (colorRes != 0) {
+        val colorInt = ResourcesCompat.getColor(context.resources, colorRes, null)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            drawable?.colorFilter = BlendModeColorFilter(colorInt, BlendMode.SRC_ATOP)
+        } else {
+            drawable?.setColorFilter(colorInt, PorterDuff.Mode.SRC_ATOP)
+        }
+    }
+    this.compoundDrawablePadding = padding
+    this.setCompoundDrawables(drawable, null, null, null)
+}
+
 
 /**
  * This method is responsible to reset all values of edittext
