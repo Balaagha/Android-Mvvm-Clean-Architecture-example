@@ -11,9 +11,10 @@ import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.viewmodel.En
 import com.example.common.listeners.TextChangedListener
 import com.example.core.view.BaseMvvmFragment
 import com.google.android.material.textfield.TextInputLayout
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_register.*
 
-
+@AndroidEntryPoint
 class RegisterFragment : BaseMvvmFragment<FragmentRegisterBinding, EntryViewModel>(
     R.layout.fragment_register, EntryViewModel::class
 ) {

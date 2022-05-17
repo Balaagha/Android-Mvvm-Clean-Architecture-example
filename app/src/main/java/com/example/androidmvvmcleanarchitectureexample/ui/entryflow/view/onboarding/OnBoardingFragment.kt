@@ -1,7 +1,6 @@
 package com.example.androidmvvmcleanarchitectureexample.ui.entryflow.view.onboarding
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelStoreOwner
@@ -14,9 +13,10 @@ import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.view.onboard
 import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.view.onboarding.screens.OnBoardingThreeFragment
 import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.viewmodel.EntryViewModel
 import com.example.core.view.BaseMvvmFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_on_boarding.*
 
-
+@AndroidEntryPoint
 class OnBoardingFragment : BaseMvvmFragment<FragmentOnBoardingBinding, EntryViewModel>(
     R.layout.fragment_on_boarding, EntryViewModel::class
 ) {
@@ -67,7 +67,7 @@ class OnBoardingFragment : BaseMvvmFragment<FragmentOnBoardingBinding, EntryView
                     onBoardingViewPager.currentItem = 2
                 }
                 2 -> {
-//                    findNavController().navigate(R.id.action_onBoardingFragment_to_loginFragment)
+                    findNavController().navigate(R.id.action_onBoardingFragment_to_loginFragment)
                 }
             }
         }

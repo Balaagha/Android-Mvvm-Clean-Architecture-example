@@ -5,8 +5,8 @@ class LoginRequest(
     var password: String?,
     var lang: String = "AZ"
 ) {
-    fun getHeaders(): HashMap<String, Any> {
-        return hashMapOf<String, Any>().apply {
+    fun getHeaders(): HashMap<String, String> {
+        return hashMapOf<String, String>().apply {
             username?.let {
                 put(USER_NAME, it)
             }
@@ -16,8 +16,8 @@ class LoginRequest(
         }
     }
 
-    fun getQueries(): HashMap<String, Any> {
-        return hashMapOf<String, Any>().apply {
+    fun getQueries(): HashMap<String, String> {
+        return hashMapOf<String, String>().apply {
             put(LANG, lang)
         }
     }

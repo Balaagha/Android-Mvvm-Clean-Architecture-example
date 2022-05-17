@@ -23,11 +23,11 @@ class EntryViewModel @Inject constructor(
     fun onSignInBtnClicked() {
         loginUserUseCase.execute(
             LoginRequest(
-                username = userData.userName.get(),
-                password = userData.userPassword.get(),
+                username = "balaagha13",
+                password = "13081994b",
             ),
             successOperation = {
-                Log.d("myTag","${it.invoke()}")
+                Log.d("myTagRequest","${it.invoke()?.authToken}")
             }
         )
     }

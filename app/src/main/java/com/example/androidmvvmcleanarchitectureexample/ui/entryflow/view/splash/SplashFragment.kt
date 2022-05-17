@@ -3,7 +3,6 @@ package com.example.androidmvvmcleanarchitectureexample.ui.entryflow.view.splash
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
@@ -11,7 +10,9 @@ import com.example.androidmvvmcleanarchitectureexample.R
 import com.example.androidmvvmcleanarchitectureexample.databinding.FragmentSplashBinding
 import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.viewmodel.EntryViewModel
 import com.example.core.view.BaseMvvmFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashFragment : BaseMvvmFragment<FragmentSplashBinding, EntryViewModel>(
     R.layout.fragment_splash, EntryViewModel::class
 ) {

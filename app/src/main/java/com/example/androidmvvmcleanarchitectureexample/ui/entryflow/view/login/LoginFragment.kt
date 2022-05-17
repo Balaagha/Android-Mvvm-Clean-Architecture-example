@@ -10,7 +10,9 @@ import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.utils.checkI
 import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.viewmodel.EntryViewModel
 import com.example.common.listeners.TextChangedListener
 import com.example.core.view.BaseMvvmFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : BaseMvvmFragment<FragmentLoginBinding, EntryViewModel>(
     R.layout.fragment_login, EntryViewModel::class
 ) {

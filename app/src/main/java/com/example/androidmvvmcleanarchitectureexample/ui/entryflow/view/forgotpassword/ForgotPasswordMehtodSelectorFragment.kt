@@ -11,9 +11,11 @@ import com.example.androidmvvmcleanarchitectureexample.R
 import com.example.androidmvvmcleanarchitectureexample.databinding.FragmentRegisterBinding
 import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.viewmodel.EntryViewModel
 import com.example.core.view.BaseMvvmFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_forgot_password_mehtod_selector.*
 
 
+@AndroidEntryPoint
 class ForgotPasswordMehtodSelectorFragment : BaseMvvmFragment<FragmentRegisterBinding, EntryViewModel>(
     R.layout.fragment_forgot_password_mehtod_selector, EntryViewModel::class
 ) {
