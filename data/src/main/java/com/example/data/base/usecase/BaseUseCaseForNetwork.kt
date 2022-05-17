@@ -1,10 +1,7 @@
 package com.example.data.base.usecase
 
 import com.example.data.R
-import com.example.data.base.models.DataWrapper
-import com.example.data.base.models.FailureBehavior
-import com.example.data.base.models.FailureType
-import com.example.data.base.models.RequestWrapper
+import com.example.data.base.models.*
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.Flow
@@ -30,7 +27,7 @@ abstract class BaseUseCaseForNetwork <ResponseType, in RequestParams> {
 
     open var isShowBaseLoadingIndicator: Boolean = false
 
-    internal abstract suspend fun run(params: RequestParams): DataWrapper<Response<ResponseType>>
+    internal abstract suspend fun run(params: RequestParams): DataWrapper<Response<ModelWrapper<ResponseType>>>
 
     suspend operator fun invoke(params: RequestParams): DataWrapper<ResponseType> {
         return parseResult(run(params))
@@ -74,12 +71,12 @@ abstract class BaseUseCaseForNetwork <ResponseType, in RequestParams> {
         }
     }
 
-    open fun parseResult(data: DataWrapper<Response<ResponseType>>): DataWrapper<ResponseType> {
+    open fun parseResult(data: DataWrapper<Response<ModelWrapper<ResponseType>>>): DataWrapper<ResponseType> {
         return when (data) {
             is DataWrapper.Success -> {
                 when(val code = data.invoke()?.code()) {
                      in 200 .. 299 -> {
-                        when (val resultBody = data.value.body()) {
+                        when (val resultBody = data.value.body()?.data) {
                             null -> {
                                 DataWrapper.Failure(
                                     failureType = FailureType.EMPTY_OR_NULL_RESULT,

@@ -21,6 +21,7 @@ import java.net.UnknownHostException
 open class BaseRepository(
     private val appContext: Context
 ) {
+
     lateinit var networkStatusListenerHelper: NetworkStatusListenerHelper
 
     init {

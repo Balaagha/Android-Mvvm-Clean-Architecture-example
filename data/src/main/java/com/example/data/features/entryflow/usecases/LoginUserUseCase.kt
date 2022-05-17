@@ -1,6 +1,7 @@
 package com.example.data.features.entryflow.usecases
 
 import com.example.data.base.models.DataWrapper
+import com.example.data.base.models.ModelWrapper
 import com.example.data.base.usecase.BaseUseCaseForNetwork
 import com.example.data.features.entryflow.models.request.LoginRequest
 import com.example.data.features.entryflow.models.responces.LoginResponse
@@ -14,7 +15,7 @@ class LoginUserUseCase @Inject constructor(
 
     override var isShowBaseLoadingIndicator = true
 
-    override suspend fun run(params: LoginRequest): DataWrapper<Response<LoginResponse>> {
+    override suspend fun run(params: LoginRequest): DataWrapper<Response<ModelWrapper<LoginResponse>>> {
         return repository.loginUser(params.asRequestWrapper)
     }
 

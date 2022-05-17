@@ -2,6 +2,7 @@ package com.example.data.features.entryflow.repository
 
 import android.content.Context
 import com.example.data.base.models.DataWrapper
+import com.example.data.base.models.ModelWrapper
 import com.example.data.base.models.RequestWrapper
 import com.example.data.base.repository.BaseRepository
 import com.example.data.features.entryflow.models.request.LoginRequest
@@ -14,7 +15,7 @@ import javax.inject.Singleton
 
 interface EntryFlowRepository {
 
-    suspend fun loginUser(requestData: RequestWrapper<LoginRequest>): DataWrapper<Response<LoginResponse>>
+    suspend fun loginUser(requestData: RequestWrapper<LoginRequest>): DataWrapper<Response<ModelWrapper<LoginResponse>>>
 
 }
 
@@ -24,7 +25,7 @@ class EntryFlowRepositoryImpl @Inject constructor(
     private val services: EntryFlowServices,
 ) : BaseRepository(context),EntryFlowRepository {
 
-    override suspend fun loginUser(requestData: RequestWrapper<LoginRequest>): DataWrapper<Response<LoginResponse>> {
+    override suspend fun loginUser(requestData: RequestWrapper<LoginRequest>): DataWrapper<Response<ModelWrapper<LoginResponse>>> {
         return safeApiCall {
             services.login(
                 queries = requestData.requestValue.getQueries(),

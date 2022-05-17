@@ -1,5 +1,6 @@
 package com.example.data.features.entryflow.services
 
+import com.example.data.base.models.ModelWrapper
 import com.example.data.features.entryflow.models.responces.LoginResponse
 import retrofit2.Response
 import retrofit2.http.HeaderMap
@@ -12,6 +13,6 @@ interface EntryFlowServices {
     suspend fun login(
         @QueryMap queries: HashMap<String, String>,
         @HeaderMap headers: HashMap<String, String>
-    ): Response<LoginResponse>
+    ): Response<ModelWrapper<LoginResponse>>
 
 }
