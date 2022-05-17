@@ -15,6 +15,3 @@ interface EntryFlowServices {
     ): Response<LoginResponse>
 
 }
-
-//  http://ec2-3-15-37-163.us-east-2.compute.amazonaws.com/beso-asanlogin-ms/login?lang=AZ
-//  http://ec2-3-15-37-163.us-east-2.compute.amazonaws.com/beso-asanlogin-ms/login?lang=AZ
