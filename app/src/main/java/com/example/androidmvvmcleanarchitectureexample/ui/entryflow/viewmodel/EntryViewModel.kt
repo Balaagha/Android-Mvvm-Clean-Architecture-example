@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.models.login.UserLoginData
+import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.view.login.LoginFragment
+import com.example.common.utils.helper.SingleLiveEvent
 import com.example.core.viewmodel.BaseViewModel
 import com.example.data.features.entryflow.models.request.LoginRequest
 import com.example.data.features.entryflow.usecases.LoginUserUseCase
@@ -18,15 +20,27 @@ class EntryViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel(savedStateHandle, application) {
 
+    /**
+     * this field contains two type of data
+     * first - class which if identify your current class is valid for navigation
+     * second - root id which navigate your true destination
+     * implementation in viewModel => navigationRouteId.postValue( Fragment::class.java to R.id.action_id )
+     *
+     */
+    val navigationRouteId = SingleLiveEvent<Pair<Class<*>, Int>>()
+
     var userData: UserLoginData = UserLoginData()
 
     fun onSignInBtnClicked() {
         loginUserUseCase.execute(
             LoginRequest(
-                username = "balaagha13",
-                password = "13081994b",
+                username = userData.userName.get(),
+                password = userData.userPassword.get(),
             ),
             successOperation = {
+                navigationRouteId.postValue(
+                    LoginFragment::class.java to ZERO
+                )
                 Log.d("myTagRequest","${it.invoke()?.authToken}")
             }
         )
@@ -36,7 +50,7 @@ class EntryViewModel @Inject constructor(
     val password = MutableLiveData("3123")
 
     companion object {
-
+        const val ZERO = 0
     }
 
 }

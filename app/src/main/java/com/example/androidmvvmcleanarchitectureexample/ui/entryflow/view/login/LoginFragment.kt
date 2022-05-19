@@ -1,14 +1,17 @@
 package com.example.androidmvvmcleanarchitectureexample.ui.entryflow.view.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
 import com.example.androidmvvmcleanarchitectureexample.R
 import com.example.androidmvvmcleanarchitectureexample.databinding.FragmentLoginBinding
+import com.example.androidmvvmcleanarchitectureexample.ui.MainActivity
 import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.utils.checkInputValidation
 import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.viewmodel.EntryViewModel
 import com.example.common.listeners.TextChangedListener
+import com.example.common.utils.extentions.observe
 import com.example.core.view.BaseMvvmFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,21 +23,41 @@ class LoginFragment : BaseMvvmFragment<FragmentLoginBinding, EntryViewModel>(
         findNavController().getViewModelStoreOwner(R.id.nav_graph_entry)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initViewSubscriber()
+    }
+
+    private fun initViewSubscriber() {
+        observe(viewModel.navigationRouteId) {
+            if (it?.first == this.javaClass) {
+                    activity?.apply {
+                        finish()
+                        startActivity(Intent(requireContext(), MainActivity::class.java))
+                    }
+            }
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setViewOnClickListeners()
 
         binding.apply {
+            viewmodel = viewModel
+
             userMail.editText?.addTextChangedListener(object : TextChangedListener {
                 override fun onTextChanged(inputLayoutText: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     userMail.error = null
                 }
             })
+
             userPassword.editText?.addTextChangedListener(object : TextChangedListener {
                 override fun onTextChanged(inputLayoutText: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     userPassword.error = null
                 }
             })
+
         }
 
     }
@@ -47,10 +70,6 @@ class LoginFragment : BaseMvvmFragment<FragmentLoginBinding, EntryViewModel>(
             signInBtn.setOnClickListener {
                 if (checkInputValidation(userMail, 5) && checkInputValidation(userPassword, 8)) {
                     viewModel.onSignInBtnClicked()
-//                    activity?.apply {
-//                        finish()
-//                        startActivity(Intent(requireContext(), MainActivity::class.java))
-//                    }
                 }
             }
             signUpBtn.setOnClickListener {
