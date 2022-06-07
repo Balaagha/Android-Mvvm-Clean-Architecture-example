@@ -90,10 +90,34 @@
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
                     app:hintTextColor="@color/gray_4"
-                    app:startIconDrawable="@drawable/ic_person"
                     app:startIconTint="@color/blue_primary">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:text="@={viewmodel.userRegisterData.firstName}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tvUserMiddleName"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:background="@android:color/transparent"
+                    android:hint="Middle name"
+                    android:textColorHint="@color/gray_4"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:boxCornerRadiusBottomEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:hintTextColor="@color/gray_4">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:text="@={viewmodel.userRegisterData.middleName}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -115,10 +139,10 @@
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
                     app:hintTextColor="@color/gray_4"
-                    app:startIconDrawable="@drawable/ic_person"
                     app:startIconTint="@color/blue_primary">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:text="@={viewmodel.userRegisterData.lastName}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -140,10 +164,10 @@
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
                     app:hintTextColor="@color/gray_4"
-                    app:startIconDrawable="@drawable/ic_person"
                     app:startIconTint="@color/blue_primary">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:text="@={viewmodel.userRegisterData.birthDate}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -165,10 +189,10 @@
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
                     app:hintTextColor="@color/gray_4"
-                    app:startIconDrawable="@drawable/ic_vector_email"
                     app:startIconTint="@color/blue_primary">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:text="@={viewmodel.userRegisterData.mail}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -190,35 +214,10 @@
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
                     app:hintTextColor="@color/gray_4"
-                    app:startIconDrawable="@drawable/ic_phone"
                     app:startIconTint="@color/blue_primary">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tvUserVoen"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:background="@android:color/transparent"
-                    android:hint="VÖEN"
-                    android:textColorHint="@color/gray_4"
-                    app:boxBackgroundColor="@android:color/transparent"
-                    app:boxCornerRadiusBottomEnd="8dp"
-                    app:boxCornerRadiusBottomStart="8dp"
-                    app:boxCornerRadiusTopEnd="8dp"
-                    app:boxCornerRadiusTopStart="8dp"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
-                    app:hintTextColor="@color/gray_4"
-                    app:startIconDrawable="@drawable/ic_voen"
-                    app:startIconTint="@color/blue_primary">
-
-                    <com.google.android.material.textfield.TextInputEditText
+                        android:text="@={viewmodel.userRegisterData.phoneNumber}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -240,10 +239,10 @@
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
                     app:hintTextColor="@color/gray_4"
-                    app:startIconDrawable="@drawable/ic_user_name"
                     app:startIconTint="@color/blue_primary">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:text="@={viewmodel.userRegisterData.userName}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -266,10 +265,10 @@
                     app:boxStrokeWidthFocused="0dp"
                     app:endIconMode="password_toggle"
                     app:hintTextColor="@color/gray_4"
-                    app:startIconDrawable="@drawable/ic_vector_password"
                     app:startIconTint="@color/blue_primary">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:text="@={viewmodel.userRegisterData.password}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword" />
@@ -293,10 +292,10 @@
                     app:boxStrokeWidthFocused="0dp"
                     app:endIconMode="password_toggle"
                     app:hintTextColor="@color/gray_4"
-                    app:startIconDrawable="@drawable/ic_vector_password"
                     app:startIconTint="@color/blue_primary">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:text="@={viewmodel.userRegisterData.rePassword}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword" />

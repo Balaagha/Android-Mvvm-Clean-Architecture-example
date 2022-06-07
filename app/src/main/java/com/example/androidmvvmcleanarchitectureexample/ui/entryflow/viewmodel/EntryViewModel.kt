@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.models.login.UserLoginData
+import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.models.register.UserRegisterData
 import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.view.login.LoginFragment
 import com.example.common.utils.helper.SingleLiveEvent
 import com.example.core.viewmodel.BaseViewModel
@@ -29,13 +30,14 @@ class EntryViewModel @Inject constructor(
      */
     val navigationRouteId = SingleLiveEvent<Pair<Class<*>, Int>>()
 
-    var userData: UserLoginData = UserLoginData()
+    var userLoginData: UserLoginData = UserLoginData()
+    var userRegisterData: UserRegisterData = UserRegisterData()
 
     fun onSignInBtnClicked() {
         loginUserUseCase.execute(
             LoginRequest(
-                username = userData.userName.get(),
-                password = userData.userPassword.get(),
+                username = userLoginData.userName.get(),
+                password = userLoginData.userPassword.get(),
             ),
             successOperation = {
                 navigationRouteId.postValue(
