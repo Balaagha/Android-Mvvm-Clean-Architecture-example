@@ -5,6 +5,45 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+
+    <color name="background_transparent">#00FFFFFF</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="light_gray">#F9F9F9</color>
+    <color name="medium_gray">#D1D1D1</color>
+    <color name="gray">#BCBCBC</color>
+    <color name="light_medium_gray">#80D1D1D1</color>
+    <color name="dark_gray">#4B4B4B</color>
+
+    <color name="black">#000000</color>
+    <color name="dark">#313C44</color>
+    <color name="color_dark_gray">#040707</color>
+    <color name="darker">#151B20</color>
+    <color name="black_neutral">#060606</color>
+
+    <color name="red">#FF4646</color>
+    <color name="yellow">#FFC114</color>
+    <color name="green">#00C980</color>
+
+
+    <color name="text_black">#000000</color>
+    <color name="text_white">#FFFFFF</color>
+    <color name="text_de_active">#515151</color>
+
+
+    <color name="blue_primary">#1F93FF</color>
+    <color name="brand_primary_pressed">#107ADB</color>
+    <color name="blue_bordered_pressed">#F0F0F0</color>]
+
+    <color name="button_default_de_active">#DFF0FF</color>
+    <color name="de_active_grey">#C4C4CC</color>
+
+    <!--  Alerter region start  -->
+    <color name="alerter_default_success_background">#4CAF50</color>
+    <color name="alert_default_error_background">#F44336</color>
+    <color name="alert_default_text_color">@color/white</color>
+    <color name="alert_default_icon_color">@color/white</color>
+    <!--  Alerter region end  -->
+
 </resources>

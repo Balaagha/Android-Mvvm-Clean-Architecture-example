@@ -8,7 +8,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.createViewModelLazy
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import com.example.common.utils.extentions.hideKeyboard
 import com.example.common.utils.extentions.observe
 import com.example.core.event.BaseUiEvent
 import com.example.core.viewmodel.BaseViewModel

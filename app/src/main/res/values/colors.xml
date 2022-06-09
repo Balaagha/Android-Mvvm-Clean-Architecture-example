@@ -4,37 +4,25 @@
     <color name="colorPrimaryDark">#5502C8</color>
     <color name="colorAccent">#9D46FF</color>
 
-    <color name="white">#FFFFFF</color>
-    <color name="lightGray">#F9F9F9</color>
-    <color name="mediumGray">#D1D1D1</color>
-    <color name="lightMediumGray">#80D1D1D1</color>
-    <color name="darkGray">#4B4B4B</color>
-    <color name="dark">#313C44</color>
-    <color name="darker">#151B20</color>
-    <color name="black">#000000</color>
-    <color name="red">#FF4646</color>
-    <color name="yellow">#FFC114</color>
-    <color name="green">#00C980</color>
-    <color name="black_neutral">#060606</color>
 
     <!-- LIGHT THEME -->
 
-    <color name="backgroundColor">@color/lightGray</color>
-    <color name="placeholderColor">@color/mediumGray</color>
+    <color name="backgroundColor">@color/light_gray</color>
+    <color name="placeholderColor">@color/medium_gray</color>
     <color name="itemColor">@color/darker</color>
 
 <!--  c Custom Chip Style-->
     <color name="checkedChipBackgroundColor">#206200EA</color>
-    <color name="chipBackgroundColor">@color/lightGray</color>
+    <color name="chipBackgroundColor">@color/light_gray</color>
     <color name="checkedChipTextColor">@color/colorPrimary</color>
-    <color name="chipTextColor">@color/darkGray</color>
+    <color name="chipTextColor">@color/dark_gray</color>
 
 <!--    // Custom CardView Style-->
-    <color name="strokeColor">@color/lightMediumGray</color>
+    <color name="strokeColor">@color/light_medium_gray</color>
     <color name="cardBackgroundColor">@color/white</color>
     <color name="cardBackgroundLightColor">#106200EA</color>
     <color name="titleColor">@color/darker</color>
-    <color name="descriptionColor">@color/darkGray</color>
+    <color name="descriptionColor">@color/dark_gray</color>
 
     <color name="statusBarColor">@color/colorPrimaryDark</color>
     <color name="contextualStatusBarColor">@color/darker</color>
@@ -43,11 +31,10 @@
 
 <!--    // Custom BottomNavigationView Style-->
     <color name="bottomNavBackground">@color/white</color>
-    <color name="bottomNavItemColor">@color/darkGray</color>
+    <color name="bottomNavItemColor">@color/dark_gray</color>
     <color name="bottomNavCheckedItemColor">@color/colorPrimary</color>
 
-<!--    // Beso-->
-    <color name="background_transparent">#00FFFFFF</color>
+    <!-- Beso -->
     <color name="background_login_flow_bottom_section">#F8F9FB</color>
     <color name="background_on_boarding_section">#CDE7FF</color>
     <color name="background_splash">#D1E8FD</color>
@@ -56,10 +43,6 @@
 
 
 
-    <!--  Text  -->
-    <color name="text_white">#FFFFFFFF</color>
-    <color name="text_de_active">#515151</color>
-
 
     <color name="gray_4">#BDBDBD</color>
     <color name="gray_3">#828282</color>
@@ -67,18 +50,7 @@
 
 
 
-
-
-    <color name="blue_primary">#1F93FF</color>
-    <color name="brand_primary_pressed">#107ADB</color>
-
-    <color name="blue_bordered_pressed">#F0F0F0</color>]
-
-    <color name="button_default_de_active">#DFF0FF</color>
-
-
     <color name="colorOnBoardingIndicatorInactive">#72BCFE</color>
-    <color name="de_active_grey">#C4C4CC</color>
 
 
 </resources>

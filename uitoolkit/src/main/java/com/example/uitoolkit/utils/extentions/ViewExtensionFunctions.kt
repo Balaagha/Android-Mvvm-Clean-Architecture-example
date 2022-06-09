@@ -1,11 +1,16 @@
-package com.example.common.utils.extentions
+@file:Suppress("DEPRECATION","unused")
+
+package com.example.uitoolkit.utils.extentions
 
 import android.content.Context
 import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
 import android.graphics.PorterDuff
+import android.graphics.Typeface
 import android.os.Build
 import android.text.Editable
+import android.text.TextUtils
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +19,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.children
 import coil.load
 import com.example.common.listeners.TextChangedListener
 import com.example.common.utils.helper.isVersionHigherAndEqual
@@ -40,7 +48,6 @@ fun Window.setStatusBarColorAnyVersion(color: Int) {
  */
 
 // Text region
-
 
 fun EditText.onTextChanged(afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object : TextChangedListener {
@@ -93,7 +100,7 @@ fun EditText.resetText() {
 
 fun MaterialTextView.setTextAppearanceAnyVersion(@StyleRes resId: Int?) {
     resId?.let {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             setTextAppearance(it)
         else
             setTextAppearance(context, it)
@@ -104,12 +111,31 @@ fun TextView.setTextColorRes(@ColorRes resId: Int) {
     setTextColor(ContextCompat.getColor(context, resId))
 }
 
+fun AppCompatTextView.setTextStyle(
+    @ColorInt color: Int,
+    mMaxLines: Int? = null,
+    mTypeface: Typeface? = null,
+    textSize: Float = 18f,
+    mEllipsize: TextUtils.TruncateAt = TextUtils.TruncateAt.END
+) {
+    setTextColor(color)
+    mTypeface?.let { typeface = it }
+    setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+    mMaxLines?.let {
+        if (mMaxLines == 1) {
+            isSingleLine = true
+            ellipsize = mEllipsize
+        } else {
+            maxLines = mMaxLines
+        }
+    }
+}
 
 // Image region
 
 fun ImageView.setImageColorRes(@ColorRes resId: Int) {
     setColorFilter(
-        ContextCompat.getColor(context, resId), android.graphics.PorterDuff.Mode.SRC_IN
+        ContextCompat.getColor(context, resId), PorterDuff.Mode.SRC_IN
     )
 }
 
@@ -121,7 +147,7 @@ fun ImageView.loadImageFromUrl(
     isCrossFade: Boolean = false,
     crossFadeDuration: Int? = null
 ) {
-    this.load(url){
+    this.load(url) {
         crossFadeDuration?.let {
             crossfade(crossFadeDuration)
         } ?: kotlin.run {
@@ -135,10 +161,6 @@ fun ImageView.loadImageFromUrl(
         }
     }
 }
-
-
-
-
 
 // View region
 
@@ -162,6 +184,30 @@ fun View.showKeyboard() {
     requestFocus()
     (context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager)?.also {
         it.showSoftInput(this, InputMethodManager.HIDE_IMPLICIT_ONLY)
+    }
+}
+
+fun setChildrenEnabled(
+    parent: ViewGroup?,
+    enabled: Boolean,
+    changeAlpha: Boolean = false,
+    alphaOnDisabled: Float = 0.5f,
+) {
+    parent ?: return
+
+    parent.children.forEach {
+        if (it is ViewGroup) {
+            setChildrenEnabled(it, enabled, changeAlpha, alphaOnDisabled)
+        }
+
+        //Image will be colorized with the Coil
+        if (it !is ImageView) {
+            if (changeAlpha) {
+                it.alpha = if (enabled) 1f else alphaOnDisabled
+            }
+        }
+
+        it.isEnabled = enabled
     }
 }
 
@@ -228,6 +274,61 @@ fun View.animateVisibleRightToLeft(duration: Long = 100) {
             .alpha(1f).translationX(0f)
     }
 }
+
+private const val DEFAULT_SCALE_VALUE = 1.07f
+private const val TRANSLATION_Y_OUT = 33f
+private const val TRANSLATION_Y_IN = 23f
+
+fun View.animateVisibleTranslation(
+    duration: Long = 100,
+    delay: Long = 0,
+    translationYVal: Float = TRANSLATION_Y_IN,
+    scale: Float? = null,
+) {
+    if (visibility != View.VISIBLE) {
+        translationY = translationYVal
+        scaleX = scale ?: DEFAULT_SCALE_VALUE
+        scaleY = scale ?: DEFAULT_SCALE_VALUE
+        visibility = View.VISIBLE
+        pivotX = 0f
+        pivotY = 0f
+
+        animate().setDuration(duration)
+            .setStartDelay(delay)
+            .alpha(1f)
+            .scaleX(1f)
+            .scaleY(1f)
+            .translationY(0f)
+    }
+}
+
+fun View.animateGoneTranslation(
+    duration: Long = 100,
+    delay: Long = 0,
+    translationYVal: Float = TRANSLATION_Y_OUT,
+    scale: Float? = null,
+    endAction: (() -> Unit)? = null,
+) {
+    if (visibility != View.GONE) {
+        pivotX = 0f
+        pivotY = 0f
+
+        animate().setDuration(duration)
+            .setStartDelay(delay)
+            .alpha(.6f)
+            .scaleX(scale ?: DEFAULT_SCALE_VALUE)
+            .scaleY(scale ?: DEFAULT_SCALE_VALUE)
+            .translationY(translationYVal)
+            .withEndAction {
+                visibility = View.GONE
+                endAction?.invoke()
+            }
+    }
+}
+
+
+
+
 
 
 
