@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.androidmvvmcleanarchitectureexample.R
 import com.example.androidmvvmcleanarchitectureexample.util.Constants.Companion.BASE_IMAGE_URL
 import com.example.androidmvvmcleanarchitectureexample.util.RecipesDiffUtil
-import com.example.common.utils.extentions.loadImageFromUrl
+import com.example.uitoolkit.utils.extentions.loadImageFromUrl
 import com.example.data.features.recipes.models.ExtendedIngredient
 import kotlinx.android.synthetic.main.ingredients_row_layout.view.*
 import java.util.*

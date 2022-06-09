@@ -6,7 +6,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import com.bumptech.glide.Glide
 import com.example.androidmvvmcleanarchitectureexample.R
-import com.example.common.utils.extentions.setStatusBarColorAnyVersion
+import com.example.uitoolkit.utils.extentions.setStatusBarColorAnyVersion
 import com.example.core.view.BaseActivity
 import com.example.uitoolkit.loading.LoadingPopup
 import dagger.hilt.android.AndroidEntryPoint
