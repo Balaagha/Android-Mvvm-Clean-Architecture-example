@@ -1,4 +1,6 @@
-package com.example.common.utils.extentions
+@file:Suppress("DEPRECATION","unused")
+
+package com.example.uitoolkit.utils.extentions
 
 import android.app.Activity
 import android.content.Context
@@ -21,7 +23,7 @@ val Context.connectivityManager: ConnectivityManager
 
 fun Context.hideKeyboard(focusedView: View? = null) {
     val view = focusedView ?: (this as? AppCompatActivity
-        ?: if (this is Fragment) this.activity else null)?.currentFocus
+        ?: (this as? Fragment)?.activity)?.currentFocus
 
     if (view != null) {
         (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
@@ -70,7 +72,7 @@ fun Context.setStatusBarColor(context: WeakReference<Activity>, @ColorRes colorR
     window?.statusBarColor = context.get()!!.resources.getColor(colorResId)
 }
 
-fun Context.showToast(msg: String,length : Int) {
+fun Context.showToast(msg: String) {
     Toast.makeText(this, msg,
         Toast.LENGTH_SHORT).show()
 }

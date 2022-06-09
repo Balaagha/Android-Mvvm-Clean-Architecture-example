@@ -1,4 +1,4 @@
-package com.example.common.utils.extentions
+package com.example.uitoolkit.utils.extentions
 
 import android.content.res.Resources
 import java.text.DecimalFormat

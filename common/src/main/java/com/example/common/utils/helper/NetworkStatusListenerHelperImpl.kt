@@ -6,7 +6,6 @@ import android.os.Build
 import android.util.Log
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
-import com.example.common.utils.extentions.connectivityManager
 import com.example.data.base.commonimpl.NetworkStatusListenerHelper
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.*
@@ -91,4 +90,9 @@ class NetworkStatusListenerHelperImpl @Inject constructor(
         Log.d("myTag", "call onLost")
         isNetworkAvailable.value = false
     }
+
+    private val Context.connectivityManager: ConnectivityManager
+        get() =
+            this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
 }
