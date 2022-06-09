@@ -13,11 +13,8 @@
 bin/
 gen/
 out/
-*.iml
 .gradle
 .idea
-#idea folder
-.idea/
 /local.properties
 /.idea/caches
 /.idea/libraries
@@ -29,8 +26,8 @@ out/
 .DS_Store
 /build
 /captures
-.externalNativeBuild
 .cxx
+/buildSrc/build/
 
 # Gradle files
 .gradle/
@@ -81,5 +78,3 @@ fastlane/test_output
 fastlane/readme.md
 /.idea/
 /.idea/codeStyles/
-
-/vendor/
