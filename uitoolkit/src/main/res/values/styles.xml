@@ -10,9 +10,8 @@
 
     <!--  buttons start  -->
 
-    <style name="Controls.Buttons.TextAppearance" parent="Controls" >
+    <style name="Controls.Buttons.TextAppearance" parent="MMediumBlack" >
         <item name="android:textSize">16sp</item>
-        <item name="fontFamily">@font/inter_regular</item>
         <item name="android:textColor">@drawable/text_appearance_default_button</item>
     </style>
 
@@ -25,6 +24,17 @@
         <item name="android:paddingEnd">@dimen/controls_buttons_default_padding_horizontal</item>
     </style>
 
+    <style name="Controls.Buttons.Text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/controls_buttons_default_height</item>
+    </style>
+
+    <style name="Controls.Buttons.Text.Black">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColor">@color/control_button_text_black</item>
+        <item name="android:layout_height">@dimen/controls_buttons_default_height</item>
+    </style>
+
     <style name="Controls.Buttons.Default">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/controls_buttons_default_height</item>
@@ -35,25 +45,15 @@
         <item name="android:background">@drawable/bg_controls_buttons_default_with_left_border_redius</item>
     </style>
 
-    <style name="Controls.Buttons.Text">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/controls_buttons_default_height</item>
-    </style>
-
-    <style name="Controls.Buttons.Text.Black">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:textColor">@color/black_neutral</item>
-        <item name="android:layout_height">@dimen/controls_buttons_default_height</item>
-    </style>
 
     <style name="Controls.Buttons.Bordered">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/controls_buttons_default_height</item>
     </style>
 
-    y<style name="Controls.Buttons.Bordered.Blue">
+    <style name="Controls.Buttons.Bordered.Blue">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:textColor">@color/black_neutral</item>
+        <item name="android:textColor">@color/control_button_text_black</item>
         <item name="android:layout_height">@dimen/controls_buttons_default_height</item>
         <item name="android:background">@drawable/bg_controls_buttons_default_bordered</item>
     </style>

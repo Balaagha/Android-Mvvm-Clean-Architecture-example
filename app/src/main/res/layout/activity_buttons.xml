@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D3D3D3"
+    tools:context=".toolkitexamples.ButtonsActivity"
+    tools:ignore="HardcodedText">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="18dp">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/DescriptionText"
+            android:text="Controls / Buttons / Default (Blue) - enable " />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/Controls.Buttons.Default"
+            android:text="Some Placeholder" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/DescriptionText"
+            android:text="Controls / Buttons / Default (Blue) - disable " />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/Controls.Buttons.Default"
+            android:enabled="false"
+            android:text="Some Placeholder" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/DescriptionText"
+            android:text="Controls / Buttons / Default (Blue) / LeftBorderRadius " />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/Controls.Buttons.Default.LeftBorderRadius"
+            android:text="Some Placeholder" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/DescriptionText"
+            android:text="Controls / Buttons / Default (Blue) / LeftBorderRadius - disable " />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/Controls.Buttons.Default.LeftBorderRadius"
+            android:enabled="false"
+            android:text="Some Placeholder" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/DescriptionText"
+            android:text="Controls / Buttons / Bordered / Blue " />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/Controls.Buttons.Bordered.Blue"
+            android:text="Sign Up" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/DescriptionText"
+            android:text="Controls / Buttons / Bordered / Blue - disable " />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/Controls.Buttons.Bordered.Blue"
+            android:enabled="false"
+            android:text="Sign Up" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/DescriptionText"
+            android:text="Controls / Buttons / Text / Black (enable true)" />
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/Controls.Buttons.Text.Black"
+            android:text="Some placeholder" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/DescriptionText"
+            android:text="Controls / Buttons / Text / Black (enable false)" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/Controls.Buttons.Text.Black"
+            android:text="Some placeholder"
+            android:enabled="false"/>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
+

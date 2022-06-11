@@ -107,6 +107,15 @@ fun MaterialTextView.setTextAppearanceAnyVersion(@StyleRes resId: Int?) {
     }
 }
 
+fun TextView.setTextAppearanceAnyVersion(@StyleRes resId: Int?) {
+    resId?.let {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            setTextAppearance(it)
+        else
+            setTextAppearance(context, it)
+    }
+}
+
 fun TextView.setTextColorRes(@ColorRes resId: Int) {
     setTextColor(ContextCompat.getColor(context, resId))
 }

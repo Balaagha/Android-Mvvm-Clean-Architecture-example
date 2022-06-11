@@ -1,6 +1,5 @@
 package com.example.uitoolkit.utils.extentions
 
-import android.app.Activity
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
@@ -12,11 +11,11 @@ import androidx.navigation.fragment.findNavController
 
 fun Fragment.hideKeyboard() = hideSoftInput(requireActivity())
 
-fun Fragment.getColor(@ColorRes id: Int) = ContextCompat.getColor(requireContext(), id)
+fun Fragment.getMyResColor(@ColorRes id: Int) = ContextCompat.getColor(requireContext(), id)
 
-fun Fragment.getDrawable(@DrawableRes id: Int) = ContextCompat.getDrawable(requireContext(), id)!!
+fun Fragment.getMyDrawable(@DrawableRes id: Int) = ContextCompat.getDrawable(requireContext(), id)!!
 
-fun Fragment.getString(id: Int) = resources.getString(id)
+fun Fragment.getMyString(id: Int) = resources.getString(id)
 
 fun <T> Fragment.getNavigationResultLiveData(key: String = "result") =
     findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<T>(key)
