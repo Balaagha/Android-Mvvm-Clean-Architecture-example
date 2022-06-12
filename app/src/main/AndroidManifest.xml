@@ -9,16 +9,26 @@
         android:name=".MyApplication"
         android:allowBackup="true"
         android:fullBackupContent="true"
-        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidMvvmCleanArchitectureExample">
+
+        <activity
+            android:name=".toolkitexamples.AlertsImplActivity"
+            android:exported="true" >
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+
         <activity
             android:name=".ui.entryflow.activity.LoginActivity"
-            android:label="Login"
-            android:exported="true" >
+            android:exported="true"
+            android:label="Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,9 +42,9 @@
             android:theme="@style/DetailsActivityStyle" />
         <activity
             android:name=".ui.MainActivity"
-            android:exported="true">
+            android:exported="true" />
 
-        </activity>
+
     </application>
 
 </manifest>

@@ -14,12 +14,15 @@ class AlertsImplActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alerts)
 
-        positive_btn_style_1.background = ContextCompat.getDrawable(this, R.drawable.btn_accent)
+        setUpOnClickListener()
 
-        positive_btn_style_1.setOnClickListener {
-            Log.d("myTag","asdasdas")
-        }
+    }
 
+    private fun setUpOnClickListener() {
+        initSimpleGenericAlert()
+    }
+
+    private fun initSimpleGenericAlert() {
         gpSimple.setOnClickListener {
             GenericPopUpHelper.Builder(supportFragmentManager)
                 .setStyle(GenericPopUpHelper.Style.STYLE_2_VERTICAL_BUTTONS)
@@ -44,4 +47,6 @@ class AlertsImplActivity : AppCompatActivity() {
                 .create()
         }
     }
+
+
 }
