@@ -7,16 +7,20 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
+import android.widget.LinearLayout
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.annotation.StyleRes
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.example.uitoolkit.R
 import com.example.uitoolkit.databinding.GenericPopUpBinding
+import com.example.uitoolkit.utils.extentions.asDp
 import com.example.uitoolkit.utils.extentions.setTextAppearanceAnyVersion
+import kotlinx.android.synthetic.main.generic_pop_up.*
 
 
 class GenericPopUpHelper private constructor(builder: Builder) {
@@ -42,6 +46,10 @@ class GenericPopUpHelper private constructor(builder: Builder) {
     // Image
     private val image: Drawable?
     private val imageResId: Int?
+
+    // Image Layout Params
+    private val imageLayoutWith: Int?
+    private var imageLayoutHeight: Int?
 
     // Content
     private val content: String?
@@ -99,6 +107,9 @@ class GenericPopUpHelper private constructor(builder: Builder) {
         image = builder.image
         imageResId = builder.imageResId
 
+        imageLayoutWith = builder.imageLayoutWith
+        imageLayoutHeight = builder.imageLayoutHeight
+
         content = builder.content
         contentResId = builder.contentResId
 
@@ -145,6 +156,11 @@ class GenericPopUpHelper private constructor(builder: Builder) {
 
         dialogFragment.setImage(image)
         dialogFragment.setImage(imageResId)
+
+        dialogFragment.setImageLayoutParams(
+            heightValue = imageLayoutHeight,
+            withValue = imageLayoutWith
+        )
 
         dialogFragment.setContent(content)
         dialogFragment.setContent(contentResId)
@@ -194,6 +210,9 @@ class GenericPopUpHelper private constructor(builder: Builder) {
         // Image
         private var image: Drawable? = null
         private var imageResId: Int? = null
+
+        private var imageLayoutWith: Int? = null
+        private var imageLayoutHeight: Int? = null
 
         // Content
         private var content: String? = null
@@ -283,6 +302,8 @@ class GenericPopUpHelper private constructor(builder: Builder) {
 
             setUpPopUpImage()
 
+            setUpPopUpImageLayoutParams()
+
             setUpPopUpContent()
 
             setUpPopUpContentColor()
@@ -355,6 +376,17 @@ class GenericPopUpHelper private constructor(builder: Builder) {
                     binding.ivImage.visibility = View.GONE
                 }
             }
+        }
+
+        private fun setUpPopUpImageLayoutParams(){
+            val layoutParams = iv_image.layoutParams as ViewGroup.LayoutParams
+            imageLayoutHeight?.let {
+                layoutParams.height = it.asDp
+            }
+            imageLayoutWith?.let {
+                layoutParams.width = it.asDp
+            }
+            iv_image.layoutParams = layoutParams
         }
 
         private fun setUpPopUpContent() {
@@ -684,6 +716,14 @@ class GenericPopUpHelper private constructor(builder: Builder) {
             this.imageResId = imageResId
         }
 
+        fun setImageLayoutParams(
+            heightValue: Int? = null,
+            withValue: Int? = null,
+        ) {
+            this.imageLayoutHeight = heightValue
+            this.imageLayoutWith = withValue
+        }
+
         fun setContentColorResource(@ColorRes contentColorResId: Int?) {
             this.contentColorResId = contentColorResId
         }
@@ -775,6 +815,10 @@ class GenericPopUpHelper private constructor(builder: Builder) {
         internal var image: Drawable? = null
         internal var imageResId: Int? = null
 
+        // Image layout params
+        internal var imageLayoutWith: Int? = null
+        internal var imageLayoutHeight: Int? = null
+
         // Content
         internal var content: String? = null
         internal var contentResId: Int? = null
@@ -861,6 +905,12 @@ class GenericPopUpHelper private constructor(builder: Builder) {
 
         fun setImage(@DrawableRes imageResId: Int): Builder {
             this.imageResId = imageResId
+            return this
+        }
+
+        fun setImageLayoutParams(imageWith: Int? = null, imageHeight: Int? = null): Builder {
+            this.imageLayoutWith = imageWith
+            this.imageLayoutHeight = imageHeight
             return this
         }
 

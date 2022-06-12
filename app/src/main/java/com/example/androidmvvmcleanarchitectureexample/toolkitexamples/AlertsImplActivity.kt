@@ -24,6 +24,10 @@ class AlertsImplActivity : AppCompatActivity() {
             GenericPopUpHelper.Builder(supportFragmentManager)
                 .setStyle(GenericPopUpHelper.Style.STYLE_2_VERTICAL_BUTTONS)
                 .setImage(R.drawable.ic_error_icon)
+                .setImageLayoutParams(
+                    imageWith = 50,
+                    imageHeight = 50
+                )
                 .setTitle("Hello!")
                 .setTitleColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
                 .setContent("Hello to my base MVVM project from my pretty pop up helper")
