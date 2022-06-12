@@ -77,13 +77,13 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/userMail"
+                    android:id="@+id/userName"
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
                     android:background="@android:color/transparent"
-                    android:hint="Email"
+                    android:hint="User name"
                     android:textColorHint="@color/gray_4"
                     app:boxBackgroundColor="@android:color/transparent"
                     app:boxCornerRadiusBottomEnd="8dp"

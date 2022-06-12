@@ -31,10 +31,10 @@ class LoginFragment : BaseMvvmFragment<FragmentLoginBinding, EntryViewModel>(
     private fun initViewSubscriber() {
         observe(viewModel.navigationRouteId) {
             if (it?.first == this.javaClass) {
-                    activity?.apply {
-                        finish()
-                        startActivity(Intent(requireContext(), MainActivity::class.java))
-                    }
+                activity?.apply {
+                    finish()
+                    startActivity(Intent(requireContext(), MainActivity::class.java))
+                }
             }
         }
     }
@@ -46,14 +46,24 @@ class LoginFragment : BaseMvvmFragment<FragmentLoginBinding, EntryViewModel>(
         binding.apply {
             viewmodel = viewModel
 
-            userMail.editText?.addTextChangedListener(object : TextChangedListener {
-                override fun onTextChanged(inputLayoutText: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    userMail.error = null
+            userName.editText?.addTextChangedListener(object : TextChangedListener {
+                override fun onTextChanged(
+                    inputLayoutText: CharSequence?,
+                    p1: Int,
+                    p2: Int,
+                    p3: Int
+                ) {
+                    userName.error = null
                 }
             })
 
             userPassword.editText?.addTextChangedListener(object : TextChangedListener {
-                override fun onTextChanged(inputLayoutText: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                override fun onTextChanged(
+                    inputLayoutText: CharSequence?,
+                    p1: Int,
+                    p2: Int,
+                    p3: Int
+                ) {
                     userPassword.error = null
                 }
             })
@@ -68,7 +78,7 @@ class LoginFragment : BaseMvvmFragment<FragmentLoginBinding, EntryViewModel>(
                 findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordMehtodSelectorFragment)
             }
             signInBtn.setOnClickListener {
-                if (checkInputValidation(userMail, 5) && checkInputValidation(userPassword, 8)) {
+                if (checkInputValidation(userName, 5) && checkInputValidation(userPassword, 8)) {
                     viewModel.onSignInBtnClicked()
                 }
             }
@@ -77,8 +87,6 @@ class LoginFragment : BaseMvvmFragment<FragmentLoginBinding, EntryViewModel>(
             }
         }
     }
-
-
 
 
 }
