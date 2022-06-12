@@ -8,48 +8,52 @@ import com.google.gson.reflect.TypeToken
 
 class SharedPrefsManager constructor(context: Context?, @SharedTypes.SharedTypesDef sharedType: String) {
 
-    val prefs: SharedPreferences? = context?.getSharedPreferences(sharedType, Context.MODE_PRIVATE)
+    val prefs: SharedPreferences?
 
-    fun <T> set(item: String, value: T) {
+    init {
+        prefs = context?.getSharedPreferences(sharedType, Context.MODE_PRIVATE)
+    }
+
+    fun <T> set(key: String, value: T) {
         val editor = prefs?.edit()
 
         when (value) {
             is Int -> {
-                editor?.putInt(item, value)
+                editor?.putInt(key, value)
             }
             is Long -> {
-                editor?.putLong(item, value)
+                editor?.putLong(key, value)
             }
             is String -> {
-                editor?.putString(item, value)
+                editor?.putString(key, value)
             }
             is Boolean -> {
-                editor?.putBoolean(item, value)
+                editor?.putBoolean(key, value)
             }
             else -> {
-                editor?.putString(item, value as String)
+                editor?.putString(key, value as String)
             }
         }
         editor?.apply()
     }
 
 
-    inline fun <reified T> get(item: String, default: T?): T? {
+    inline fun <reified T> get(key: String, default: T?): T? {
         return when (T::class) {
             Int::class -> {
-                prefs?.getInt(item, default as Int) as T?
+                prefs?.getInt(key, default as Int) as T?
             }
             Long::class -> {
-                prefs?.getLong(item, default as Long) as T?
+                prefs?.getLong(key, default as Long) as T?
             }
             String::class -> {
-                prefs?.getString(item, default as String?) as T?
+                prefs?.getString(key, default as String?) as T?
             }
             Boolean::class -> {
-                prefs?.getBoolean(item, default as Boolean) as T?
+                prefs?.getBoolean(key, default as Boolean) as T?
             }
             else -> {
-                prefs?.getString(item, default as String?) as T?
+                prefs?.getString(key, default as String?) as T?
             }
         }
     }

@@ -45,20 +45,20 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
-        navController = navHostFragment.navController
-
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.recipesFragment,
-                R.id.favoriteRecipesFragment,
-                R.id.foodJokeFragment
-            )
-        )
-
-        bottomNavigationView.setupWithNavController(navController)
-
-        setupActionBarWithNavController(navController, appBarConfiguration)
+//        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+//        navController = navHostFragment.navController
+//
+//        val appBarConfiguration = AppBarConfiguration(
+//            setOf(
+//                R.id.recipesFragment,
+//                R.id.favoriteRecipesFragment,
+//                R.id.foodJokeFragment
+//            )
+//        )
+//
+//        bottomNavigationView.setupWithNavController(navController)
+//
+//        setupActionBarWithNavController(navController, appBarConfiguration)
 
     }
 

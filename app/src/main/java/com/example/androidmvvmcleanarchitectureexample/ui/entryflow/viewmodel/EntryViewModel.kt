@@ -1,6 +1,9 @@
 package com.example.androidmvvmcleanarchitectureexample.ui.entryflow.viewmodel
 
+import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Context
+import android.service.autofill.UserData
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -11,15 +14,18 @@ import com.example.common.utils.helper.SingleLiveEvent
 import com.example.core.viewmodel.BaseViewModel
 import com.example.data.features.entryflow.models.request.LoginRequest
 import com.example.data.features.entryflow.usecases.LoginUserUseCase
+import com.example.data.helper.manager.UserDataManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 @HiltViewModel
 class EntryViewModel @Inject constructor(
-    var loginUserUseCase: LoginUserUseCase,
-    application: Application,
-    savedStateHandle: SavedStateHandle
-) : BaseViewModel(savedStateHandle, application) {
+    private val loginUserUseCase: LoginUserUseCase,
+    private val applicationData: Application,
+    savedStateHandle: SavedStateHandle,
+) : BaseViewModel(savedStateHandle, applicationData) {
+
 
     /**
      * this field contains two type of data
@@ -34,22 +40,26 @@ class EntryViewModel @Inject constructor(
     var userRegisterData: UserRegisterData = UserRegisterData()
 
     fun onSignInBtnClicked() {
+        val userName = userLoginData.userName.get()
+        val userPassword = userLoginData.userPassword.get()
         loginUserUseCase.execute(
             LoginRequest(
-                username = userLoginData.userName.get(),
-                password = userLoginData.userPassword.get(),
+                username = userName,
+                password = userPassword
             ),
             successOperation = {
+                it.invoke()?.authToken?.let { authToken ->
+                    UserDataManager.saveApiToken(authToken, applicationData.applicationContext)
+                }
+                userName?.let {
+                    UserDataManager.saveUserName(userName, applicationData.applicationContext)
+                }
                 navigationRouteId.postValue(
                     LoginFragment::class.java to ZERO
                 )
-                Log.d("myTagRequest","${it.invoke()?.authToken}")
             }
         )
     }
-
-    val email = MutableLiveData("213")
-    val password = MutableLiveData("3123")
 
     companion object {
         const val ZERO = 0
