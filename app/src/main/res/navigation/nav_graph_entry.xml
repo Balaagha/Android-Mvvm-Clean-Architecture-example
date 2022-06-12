@@ -23,11 +23,20 @@
         android:label="fragment_on_boarding"
         tools:layout="@layout/fragment_on_boarding" >
         <action
-            android:id="@+id/action_onBoardingFragment_to_loginFragment"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/onBoardingFragment"
+            android:id="@+id/action_onBoardingFragment_to_loginFlowTypeFragment"
+            app:destination="@id/loginFlowTypeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFlowTypeFragment"
+        android:name="com.example.androidmvvmcleanarchitectureexample.ui.entryflow.view.onboarding.LoginFlowTypeFragment"
+        android:label="LoginFlowTypeFragment"
+        tools:layout="@layout/fragment_login_flow_type" >
+    <action
+            android:id="@+id/action_loginFlowTypeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.androidmvvmcleanarchitectureexample.ui.entryflow.view.login.LoginFragment"
@@ -50,6 +59,9 @@
         android:id="@+id/forgotPasswordMehtodSelectorFragment"
         android:name="com.example.androidmvvmcleanarchitectureexample.ui.entryflow.view.forgotpassword.ForgotPasswordMehtodSelectorFragment"
         android:label="ForgotPasswordMehtodSelectorFragment" />
+
+
+
     <!--    <fragment-->
     <!--        android:id="@+id/otpFragment"-->
     <!--        android:name="com.example.beso.ui.splash.otp.OtpFragment"-->

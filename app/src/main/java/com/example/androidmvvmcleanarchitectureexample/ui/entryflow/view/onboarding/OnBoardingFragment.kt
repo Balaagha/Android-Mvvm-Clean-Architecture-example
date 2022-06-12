@@ -67,7 +67,7 @@ class OnBoardingFragment : BaseMvvmFragment<FragmentOnBoardingBinding, EntryView
                     onBoardingViewPager.currentItem = 2
                 }
                 2 -> {
-                    findNavController().navigate(R.id.action_onBoardingFragment_to_loginFragment)
+                    findNavController().navigate(R.id.action_onBoardingFragment_to_loginFlowTypeFragment)
                 }
             }
         }
