@@ -4,6 +4,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
@@ -16,6 +17,8 @@ fun Fragment.getMyResColor(@ColorRes id: Int) = ContextCompat.getColor(requireCo
 fun Fragment.getMyDrawable(@DrawableRes id: Int) = ContextCompat.getDrawable(requireContext(), id)!!
 
 fun Fragment.getMyString(id: Int) = resources.getString(id)
+
+fun Fragment.getMyFont(id: Int) = ResourcesCompat.getFont(requireContext(), id)
 
 fun <T> Fragment.getNavigationResultLiveData(key: String = "result") =
     findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<T>(key)
