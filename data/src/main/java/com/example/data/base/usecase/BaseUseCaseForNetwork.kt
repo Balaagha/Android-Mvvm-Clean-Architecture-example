@@ -2,13 +2,17 @@ package com.example.data.base.usecase
 
 import com.example.data.R
 import com.example.data.base.models.*
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import okhttp3.ResponseBody
 import retrofit2.Response
 import java.util.concurrent.CancellationException
 import java.util.concurrent.atomic.AtomicBoolean
+
 
 abstract class BaseUseCaseForNetwork <ResponseType, in RequestParams> {
 
@@ -65,6 +69,8 @@ abstract class BaseUseCaseForNetwork <ResponseType, in RequestParams> {
             emit(
                 DataWrapper.Failure(
                     failureType = FailureType.OTHER,
+                    failureBehavior = FailureBehavior.ALERT,
+                    messageRes = R.string.base_generic_error
                 )
             )
             isCurrentUseCaseBusy.set(false)
@@ -100,21 +106,28 @@ abstract class BaseUseCaseForNetwork <ResponseType, in RequestParams> {
                         DataWrapper.Failure(
                             failureType = FailureType.API_REDIRECTION_CODE_RESPONSE,
                             code = data.value.code(),
-                            message = data.value.errorBody()?.string()
+                            message = data.value.errorBody()?.string(),
+                            failureBehavior = FailureBehavior.SILENT
                         )
                     }
                     else -> {
-                        if(code == 401){
+                        if (code == 401) {
                             DataWrapper.Failure(
                                 failureType = FailureType.AUTH_TOKEN_EXPIRED,
                                 code = data.value.code(),
-                                message = data.value.errorBody()?.string()
+                                message = data.value.errorBody()?.string(),
+                                failureBehavior = FailureBehavior.SILENT
                             )
                         } else {
+                            val errorResponse: ApiErrorResponseModel? = parseErrorBody(data.value.errorBody())
+
                             DataWrapper.Failure(
                                 failureType = FailureType.API_GENERIC_ERROR,
                                 code = data.value.code(),
-                                message = data.value.errorBody()?.string()
+                                title = errorResponse?.error,
+                                message = errorResponse?.errorDetails,
+                                messageRes = if(errorResponse?.error == null && errorResponse?.errorDetails == null) R.string.base_generic_error else null,
+                                failureBehavior = FailureBehavior.ALERT
                             )
                         }
                     }
@@ -127,7 +140,7 @@ abstract class BaseUseCaseForNetwork <ResponseType, in RequestParams> {
                         return DataWrapper.Failure(
                             failureType = FailureType.NO_INTERNET_CONNECTION,
                             failureBehavior = FailureBehavior.ALERT,
-                            messageRes = R.string.base_no_internet_connection
+                            messageRes = R.string.base_no_internet_connection,
                         )
                     }
                     FailureType.RESPONSE_TIMEOUT -> {
@@ -151,6 +164,15 @@ abstract class BaseUseCaseForNetwork <ResponseType, in RequestParams> {
                     messageRes = R.string.base_generic_error
                 )
             }
+        }
+    }
+
+    open fun parseErrorBody(responseBody: ResponseBody?): ApiErrorResponseModel? {
+        return responseBody?.let { errorResponseBody ->
+            Gson().fromJson(
+                errorResponseBody.charStream(),
+                object : TypeToken<ApiErrorResponseModel>() {}.type
+            )
         }
     }
 

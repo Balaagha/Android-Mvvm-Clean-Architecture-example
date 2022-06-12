@@ -869,7 +869,7 @@ class GenericPopUpHelper private constructor(builder: Builder) {
         }
 
         fun setTitle(title: String?): Builder {
-            this.title = title!!
+            this.title = title
             return this
         }
 
@@ -889,7 +889,7 @@ class GenericPopUpHelper private constructor(builder: Builder) {
         }
 
         fun setContent(content: String?): Builder {
-            this.content = content!!
+            this.content = content
             return this
         }
 
@@ -899,7 +899,7 @@ class GenericPopUpHelper private constructor(builder: Builder) {
         }
 
         fun setImage(image: Drawable?): Builder {
-            this.image = image!!
+            this.image = image
             return this
         }
 
@@ -928,7 +928,7 @@ class GenericPopUpHelper private constructor(builder: Builder) {
             positiveButton: String?,
             positiveButtonClick: ((popUp: DialogFragment) -> Unit)?
         ): Builder {
-            this.positiveButton = positiveButton!!
+            this.positiveButton = positiveButton
             this.positiveButtonClick = positiveButtonClick
             return this
         }
@@ -970,7 +970,7 @@ class GenericPopUpHelper private constructor(builder: Builder) {
             negativeButton: String?,
             negativeButtonClick: ((popUp: DialogFragment) -> Unit)?
         ): Builder {
-            this.negativeButton = negativeButton!!
+            this.negativeButton = negativeButton
             this.negativeButtonClick = negativeButtonClick
             return this
         }

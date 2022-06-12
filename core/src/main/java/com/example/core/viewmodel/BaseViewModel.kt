@@ -1,6 +1,7 @@
 package com.example.core.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -28,6 +29,13 @@ open class BaseViewModel(
         SingleLiveEvent()
 
     /**
+     * For triggering base loading indicator
+     */
+    val loadingEvent: SingleLiveEvent<Boolean> =
+        SingleLiveEvent()
+
+
+    /**
      * Top level exception handler for the included context
      */
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
@@ -42,9 +50,7 @@ open class BaseViewModel(
     ) {
         launchSafe {
             this@execute.invokeAsFlow(params).collect {
-                if (isShowBaseLoadingIndicator) {
-                    event.postValue(BaseUiEvent.LoadingIndicator(it is DataWrapper.Loading))
-                }
+
                 when(it){
                     is DataWrapper.Success ->{
                         successOperation?.invoke(it)
@@ -52,7 +58,12 @@ open class BaseViewModel(
                     is DataWrapper.Failure ->{
                         when (it.failureBehavior){
                             FailureBehavior.ALERT -> {
-                                event.postValue(BaseUiEvent.Alert())
+                                event.postValue(BaseUiEvent.Alert(
+                                    title = it.title,
+                                    titleRes = it.titleRes,
+                                    message = it.message,
+                                    messageRes = it.messageRes
+                                ))
                             }
                             FailureBehavior.SNACK_BAR -> {
                                 event.postValue(BaseUiEvent.SnackBar())
@@ -60,9 +71,19 @@ open class BaseViewModel(
                             FailureBehavior.TOAST -> {
                                 event.postValue(BaseUiEvent.Toast())
                             }
+                            else -> {
+                                // Nothing
+                            }
                         }
                         failOperation?.invoke(it)
                     }
+                    else -> {
+                        // Nothing
+                    }
+                }
+
+                if (isShowBaseLoadingIndicator) {
+                    loadingEvent.postValue(it is DataWrapper.Loading)
                 }
 
                 block?.invoke(it)

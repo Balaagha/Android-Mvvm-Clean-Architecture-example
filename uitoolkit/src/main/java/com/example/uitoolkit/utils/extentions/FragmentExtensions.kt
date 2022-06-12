@@ -16,7 +16,13 @@ fun Fragment.getMyResColor(@ColorRes id: Int) = ContextCompat.getColor(requireCo
 
 fun Fragment.getMyDrawable(@DrawableRes id: Int) = ContextCompat.getDrawable(requireContext(), id)!!
 
-fun Fragment.getMyString(id: Int) = resources.getString(id)
+fun Fragment.getMyString(id: Int?) : String? {
+    id?.let {
+        return resources.getString(id)
+    } ?: run{
+        return null
+    }
+}
 
 fun Fragment.getMyFont(id: Int) = ResourcesCompat.getFont(requireContext(), id)
 

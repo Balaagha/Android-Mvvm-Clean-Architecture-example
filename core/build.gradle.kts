@@ -46,6 +46,8 @@ dependencies {
 
     implementation(project(Modules.data))
     implementation(project(Modules.common))
+    implementation(project(Modules.uiToolKit))
+// implementation(project(mapOf("path" to ":uitoolkit")))
 
 //    // Test Libraries
     testImplementation(AppDependencies.testLibraries)

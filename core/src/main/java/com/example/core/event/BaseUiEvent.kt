@@ -11,5 +11,4 @@ sealed class BaseUiEvent {
         @StringRes val titleRes: Int? = null,
         @StringRes val messageRes: Int? = null
     ) : BaseUiEvent()
-    class LoadingIndicator(val isLoadingEnable: Boolean): BaseUiEvent()
 }
