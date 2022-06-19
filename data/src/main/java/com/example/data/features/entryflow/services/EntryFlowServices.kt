@@ -1,8 +1,10 @@
 package com.example.data.features.entryflow.services
 
 import com.example.data.base.models.ModelWrapper
-import com.example.data.features.entryflow.models.responces.LoginResponse
+import com.example.data.features.entryflow.models.request.register.RegisterRequestData
+import com.example.data.features.entryflow.models.responces.LoginRegisterResponse
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.HeaderMap
 import retrofit2.http.POST
 import retrofit2.http.QueryMap
@@ -13,6 +15,12 @@ interface EntryFlowServices {
     suspend fun login(
         @QueryMap queries: HashMap<String, String>,
         @HeaderMap headers: HashMap<String, String>
-    ): Response<ModelWrapper<LoginResponse>>
+    ): Response<ModelWrapper<LoginRegisterResponse>>
+
+    @POST("/beso-asanlogin-ms/createUser")
+    suspend fun register(
+        @QueryMap queries: HashMap<String, String>,
+        @Body userData: RegisterRequestData
+    ): Response<ModelWrapper<LoginRegisterResponse>>
 
 }

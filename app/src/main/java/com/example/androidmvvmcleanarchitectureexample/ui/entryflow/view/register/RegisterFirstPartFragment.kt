@@ -8,15 +8,17 @@ import com.example.androidmvvmcleanarchitectureexample.R
 import com.example.androidmvvmcleanarchitectureexample.databinding.FragmentRegisterFirstPartBinding
 import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.viewmodel.EntryViewModel
 import com.example.common.listeners.TextChangedListener
+import com.example.common.utils.extentions.isNumber
 import com.example.core.view.BaseMvvmFragment
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_register_first_part.*
 
 @AndroidEntryPoint
-class RegisterFirstPartFragment : BaseMvvmFragment<FragmentRegisterFirstPartBinding, EntryViewModel>(
-    R.layout.fragment_register_first_part, EntryViewModel::class
-) {
+class RegisterFirstPartFragment :
+    BaseMvvmFragment<FragmentRegisterFirstPartBinding, EntryViewModel>(
+        R.layout.fragment_register_first_part, EntryViewModel::class
+    ) {
 
     override val viewModelFactoryOwner: () -> ViewModelStoreOwner = {
         findNavController().getViewModelStoreOwner(R.id.nav_graph_entry)
@@ -25,7 +27,7 @@ class RegisterFirstPartFragment : BaseMvvmFragment<FragmentRegisterFirstPartBind
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setViewOnClickListeners()
-        setTextChangeListener(tvUserFirstName, 5)
+        setTextChangeListener(tvUserFirstName, 4)
         setTextChangeListener(tvUserMiddleName, 0)
         setTextChangeListener(tvUserLastName, 5)
         setTextChangeListener(tvUserMail, 5)
@@ -46,24 +48,67 @@ class RegisterFirstPartFragment : BaseMvvmFragment<FragmentRegisterFirstPartBind
         isCheckPasswordMatch: Boolean = false,
         isBirthDayInput: Boolean = false
     ) {
+
         binding.apply {
+            var oldValue = ""
             inputLayout?.editText?.addTextChangedListener(object : TextChangedListener {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                    s?.let {
+                        oldValue = it.toString()
+                    }
+                }
+
                 override fun onTextChanged(
                     inputLayoutText: CharSequence?,
                     p1: Int,
                     p2: Int,
                     p3: Int
                 ) {
-                    if (!isCheckPasswordMatch) {
-                        inputLayout.error = null
-                    } else {
+
+                    fun setEditTextValueWithoutNotifyListener(
+                        value: String,
+                        cursorPosition: Int = value.length
+                    ) {
+                        inputLayout.editText?.removeTextChangedListener(this)
+                        val cursorPositionValue = when {
+                            cursorPosition < 0 -> 0
+                            cursorPosition > value.length -> value.length
+                            else -> cursorPosition
+                        }
+                        oldValue = try {
+                            inputLayout.editText?.setText(value)
+                            inputLayout.editText?.setSelection(cursorPositionValue)
+                            value
+                        } catch (e: Exception) {
+                            inputLayout.editText?.setText("")
+                            inputLayout.editText?.setSelection(0)
+                            "EMPTY"
+                        }
+                        inputLayout.editText?.addTextChangedListener(this)
+                    }
+
+                    if (isBirthDayInput) {
                         inputLayoutText?.let { inputLayoutTextValue ->
-                            val isValid = inputLayoutTextValue.length > minLength
-                            if (isValid && passwordLayout != null) {
-                                val isMatchPassword =
-                                    inputLayoutTextValue.toString() == passwordLayout.editText?.text.toString()
-                                if (isMatchPassword) {
-                                    inputLayout.error = null
+//                            inputLayoutTextValue.toString().isNumber()  {}
+                            // birthday input logic
+                        }
+                    } else {
+                        if (!isCheckPasswordMatch) {
+                            inputLayout.error = null
+                        } else {
+                            inputLayoutText?.let { inputLayoutTextValue ->
+                                val isValid = inputLayoutTextValue.length > minLength
+                                if (isValid && passwordLayout != null) {
+                                    val isMatchPassword =
+                                        inputLayoutTextValue.toString() == passwordLayout.editText?.text.toString()
+                                    if (isMatchPassword) {
+                                        inputLayout.error = null
+                                    }
                                 }
                             }
                         }
@@ -86,8 +131,7 @@ class RegisterFirstPartFragment : BaseMvvmFragment<FragmentRegisterFirstPartBind
                     checkValidation(tvUserPassword, 7) &&
                     checkValidation(tvUserRePassword, 7, tvUserPassword)
                 ) {
-//                findNavController().navigate(R.id.action_registerFragment_to_otpFragment)
-                    // Navigate to dashboard
+                    findNavController().navigate(R.id.action_registerFirstPartFragment_to_registerSecondPartFragment)
                 }
             }
         }

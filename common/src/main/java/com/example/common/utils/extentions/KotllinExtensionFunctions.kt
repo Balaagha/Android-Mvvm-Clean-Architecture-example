@@ -56,3 +56,7 @@ fun String?.convertHtmlTagToLink(htmlFlag: Int): Spanned {
         }
     }
 }
+
+fun String?.isNumber(): Boolean {
+    return if (this.isNullOrEmpty()) false else this.all { Character.isDigit(it) }
+}

@@ -8,6 +8,7 @@ import com.example.androidmvvmcleanarchitectureexample.R
 import com.example.androidmvvmcleanarchitectureexample.databinding.FragmentRegisterSecondPartBinding
 import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.viewmodel.EntryViewModel
 import com.example.common.listeners.TextChangedListener
+import com.example.common.utils.extentions.observe
 import com.example.core.view.BaseMvvmFragment
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +21,20 @@ class RegisterSecondPartFragment : BaseMvvmFragment<FragmentRegisterSecondPartBi
     override val viewModelFactoryOwner: () -> ViewModelStoreOwner = {
         findNavController().getViewModelStoreOwner(R.id.nav_graph_entry)
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initViewSubscriber()
+    }
+
+    private fun initViewSubscriber() {
+        observe(viewModel.navigationRouteId) {
+            if (it?.first == this.javaClass) {
+                findNavController().popBackStack(R.id.loginFragment,false)
+            }
+        }
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -86,8 +101,7 @@ class RegisterSecondPartFragment : BaseMvvmFragment<FragmentRegisterSecondPartBi
                     checkValidation(tvBusinessVatNumber, 5)&&
                     checkValidation(tvBusinessRegistrationNumber, 5)
                 ) {
-//                findNavController().navigate(R.id.action_registerFragment_to_otpFragment)
-                    // Navigate to dashboard
+                    viewModel.onSignUpBtnClicked()
                 }
             }
         }

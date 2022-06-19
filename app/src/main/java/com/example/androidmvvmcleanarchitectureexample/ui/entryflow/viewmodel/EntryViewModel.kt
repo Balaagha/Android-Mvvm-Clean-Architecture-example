@@ -1,27 +1,25 @@
 package com.example.androidmvvmcleanarchitectureexample.ui.entryflow.viewmodel
 
-import android.annotation.SuppressLint
 import android.app.Application
-import android.content.Context
-import android.service.autofill.UserData
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.models.login.UserLoginData
 import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.models.register.UserRegisterData
 import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.view.login.LoginFragment
+import com.example.androidmvvmcleanarchitectureexample.ui.entryflow.view.register.RegisterSecondPartFragment
 import com.example.common.utils.helper.SingleLiveEvent
 import com.example.core.viewmodel.BaseViewModel
 import com.example.data.features.entryflow.models.request.LoginRequest
+import com.example.data.features.entryflow.models.request.register.*
 import com.example.data.features.entryflow.usecases.LoginUserUseCase
+import com.example.data.features.entryflow.usecases.RegisterUserUseCase
 import com.example.data.helper.manager.UserDataManager
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 @HiltViewModel
 class EntryViewModel @Inject constructor(
     private val loginUserUseCase: LoginUserUseCase,
+    private val registerUserUseCase: RegisterUserUseCase,
     private val applicationData: Application,
     savedStateHandle: SavedStateHandle,
 ) : BaseViewModel(savedStateHandle, applicationData) {
@@ -59,6 +57,52 @@ class EntryViewModel @Inject constructor(
                 )
             }
         )
+    }
+
+    fun onSignUpBtnClicked() {
+
+        val requestData = RegisterRequestData(
+            userData = UserData(
+                birthDate = null,
+                firstName = userRegisterData.firstName.get(),
+                lastName = userRegisterData.lastName.get(),
+                middleName = userRegisterData.middleName.get(),
+                password = userRegisterData.password.get(),
+                userName = userRegisterData.userName.get(),
+            ),
+            contractData = ContractData(
+                locationData = LocationData(
+                    country = userRegisterData.country.get(),
+                    streetName = userRegisterData.streetName.get(),
+                    streetNumber = userRegisterData.streetNumber.get(),
+                ),
+                mail = userRegisterData.mail.get(),
+                phoneNumber = userRegisterData.phoneNumber.get()
+            ),
+            businessData = BusinessData(
+                businessAddress = userRegisterData.businessAddress.get(),
+                businessMailAddress = userRegisterData.businessMailAddress.get(),
+                businessName = userRegisterData.businessName.get(),
+                businessRegistrationNumber = userRegisterData.businessRegistrationNumber.get(),
+                businessVatNumber = userRegisterData.businessVatNumber.get(),
+            )
+        )
+
+        registerUserUseCase.execute(
+            RegisterRequest(
+                requestData = requestData
+            ),
+            successOperation = {
+                it.invoke()?.authToken?.let { authToken ->
+                    UserDataManager.saveApiToken(authToken, applicationData.applicationContext)
+                }
+                userLoginData.userName.set(requestData.userData?.userName)
+                navigationRouteId.postValue(
+                    RegisterSecondPartFragment::class.java to ZERO
+                )
+            }
+        )
+
     }
 
     companion object {

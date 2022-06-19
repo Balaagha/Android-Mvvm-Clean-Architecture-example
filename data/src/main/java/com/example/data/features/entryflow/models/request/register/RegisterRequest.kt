@@ -1,7 +1,7 @@
 package com.example.data.features.entryflow.models.request.register
 
 class RegisterRequest(
-    requestData: RegisterRequestData,
+    var requestData: RegisterRequestData,
     var lang: String = "AZ"
 ) {
 

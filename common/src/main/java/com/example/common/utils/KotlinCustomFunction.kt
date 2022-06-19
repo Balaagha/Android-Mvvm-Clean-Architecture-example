@@ -1,4 +1,4 @@
-package com.example.androidmvvmcleanarchitectureexample.util
+package com.example.common.utils
 
 import android.app.Activity
 import android.content.Context
@@ -22,4 +22,8 @@ fun hideSoftKeyboard(activity: Activity) {
     inputMethodManager.hideSoftInputFromWindow(
         activity.currentFocus?.windowToken, 0
     )
+}
+
+fun isNumber(s: String?): Boolean {
+    return if (s.isNullOrEmpty()) false else s.all { Character.isDigit(it) }
 }
