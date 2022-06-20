@@ -30,7 +30,7 @@ class RegisterSecondPartFragment : BaseMvvmFragment<FragmentRegisterSecondPartBi
     private fun initViewSubscriber() {
         observe(viewModel.navigationRouteId) {
             if (it?.first == this.javaClass) {
-                findNavController().popBackStack(R.id.loginFragment,false)
+                findNavController().popBackStack(R.id.loginFragment,true)
             }
         }
     }

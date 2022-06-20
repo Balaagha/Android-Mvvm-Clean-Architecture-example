@@ -52,17 +52,11 @@ class RegisterFirstPartFragment :
         binding.apply {
             var oldValue = ""
             inputLayout?.editText?.addTextChangedListener(object : TextChangedListener {
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                     s?.let {
                         oldValue = it.toString()
                     }
                 }
-
                 override fun onTextChanged(
                     inputLayoutText: CharSequence?,
                     p1: Int,
@@ -70,12 +64,9 @@ class RegisterFirstPartFragment :
                     p3: Int
                 ) {
 
-                    fun setEditTextValueWithoutNotifyListener(
-                        value: String,
-                        cursorPosition: Int = value.length
-                    ) {
+                    fun setEditTextValueWithoutNotifyListener(value: String, cursorPosition: Int = value.length) {
                         inputLayout.editText?.removeTextChangedListener(this)
-                        val cursorPositionValue = when {
+                        val cursorPositionValue = when{
                             cursorPosition < 0 -> 0
                             cursorPosition > value.length -> value.length
                             else -> cursorPosition
@@ -84,7 +75,7 @@ class RegisterFirstPartFragment :
                             inputLayout.editText?.setText(value)
                             inputLayout.editText?.setSelection(cursorPositionValue)
                             value
-                        } catch (e: Exception) {
+                        } catch (e: Exception){
                             inputLayout.editText?.setText("")
                             inputLayout.editText?.setSelection(0)
                             "EMPTY"
@@ -92,10 +83,10 @@ class RegisterFirstPartFragment :
                         inputLayout.editText?.addTextChangedListener(this)
                     }
 
-                    if (isBirthDayInput) {
+                    if (isBirthDayInput){
                         inputLayoutText?.let { inputLayoutTextValue ->
 //                            inputLayoutTextValue.toString().isNumber()  {}
-                            // birthday input logic
+                           // birthday input logic
                         }
                     } else {
                         if (!isCheckPasswordMatch) {

@@ -1,13 +1,11 @@
 package com.example.androidmvvmcleanarchitectureexample.ui
 
 import android.os.Bundle
+import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.example.androidmvvmcleanarchitectureexample.R
+import com.example.common.utils.extentions.setupWithNavController
 import com.example.core.view.BaseActivity
 import com.example.uitoolkit.loading.LoadingPopup
 import com.example.uitoolkit.loading.LoadingPopup.Companion.getInstance
@@ -31,7 +29,7 @@ class MainActivity : BaseActivity() {
             .build()
     }
 
-    private lateinit var navController: NavController
+    lateinit var navController: LiveData<NavController>
 
     override fun showLoadingDialog(): Boolean {
         return LoadingPopup.showLoadingPopUp(loadingDialog)
@@ -44,26 +42,34 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    }
 
-//        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
-//        navController = navHostFragment.navController
-//
-//        val appBarConfiguration = AppBarConfiguration(
-//            setOf(
-//                R.id.recipesFragment,
-//                R.id.favoriteRecipesFragment,
-//                R.id.foodJokeFragment
-//            )
-//        )
-//
-//        bottomNavigationView.setupWithNavController(navController)
-//
-//        setupActionBarWithNavController(navController, appBarConfiguration)
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
 
+        setUpBottomNavigationWithGraphs()
+    }
+
+    private fun setUpBottomNavigationWithGraphs() {
+        val graphIds = listOf(
+            R.navigation.nav_home,
+            R.navigation.nav_home,
+            R.navigation.nav_home,
+            R.navigation.nav_home,
+        )
+
+        val controller = bottomNavigationView.setupWithNavController(
+            graphIds,
+            supportFragmentManager,
+            R.id.fragment_host_container,
+            intent
+        )
+
+        navController = controller
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        return navController.value?.navigateUp()!! || super.onSupportNavigateUp()
     }
 
 }
