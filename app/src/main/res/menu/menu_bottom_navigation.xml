@@ -11,13 +11,13 @@
       android:icon="@drawable/ic_accounts"
       android:title="Accounts" />
 
-  <item
-      android:id="@+id/nav_modal"
-      android:icon="@drawable/ic_modal"
-      android:title="Modals" />
+<!--  <item-->
+<!--      android:id="@+id/nav_modal"-->
+<!--      android:icon="@drawable/ic_modal"-->
+<!--      android:title="Modals" />-->
 
-  <item
-      android:id="@+id/nav_other"
-      android:icon="@drawable/ic_other"
-      android:title="Others" />
+<!--  <item-->
+<!--      android:id="@+id/nav_other"-->
+<!--      android:icon="@drawable/ic_other"-->
+<!--      android:title="Others" />-->
 </menu>
