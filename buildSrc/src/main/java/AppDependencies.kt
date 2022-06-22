@@ -35,6 +35,7 @@ object AppDependencies {
 
         add(Coil.coil)
         add(Coil.coilBase)
+        add(Coil.coilGif)
 
         add(Network.retrofit2)
         add(Network.googleCodeGson)
@@ -156,11 +157,13 @@ object AppDependencies {
     object Coil {
         const val coil = "io.coil-kt:coil:${Versions.coilVersion}"
         const val coilBase = "io.coil-kt:coil-base:${Versions.coilVersion}"
+        const val coilGif = "io.coil-kt:coil-gif:${Versions.coilVersion}"
+
     }
 
     object Glide {
-        const val glideImpl = "com.github.bumptech.glide:glide:4.8.0"
-        const val glideCompiler = "com.github.bumptech.glide:compiler:4.8.0"
+        const val glideImpl = "com.github.bumptech.glide:glide:${Versions.glideVersion}"
+        const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glideVersion}"
     }
 
     object Network {

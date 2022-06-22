@@ -10,7 +10,10 @@ object Versions {
     const val coroutineVersion ="1.5.2"
 
     // Coil
-    const val coilVersion ="1.4.0"
+    const val coilVersion ="2.1.0"
+
+    // Glide
+    const val glideVersion ="4.13.0"
 
     // Room
     const val roomVersion ="2.4.2"
