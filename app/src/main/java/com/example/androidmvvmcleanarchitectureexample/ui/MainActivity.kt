@@ -1,16 +1,17 @@
 package com.example.androidmvvmcleanarchitectureexample.ui
 
+import com.example.androidmvvmcleanarchitectureexample.R
 import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import com.bumptech.glide.Glide
-import com.example.androidmvvmcleanarchitectureexample.R
 import com.example.common.utils.extentions.setupWithNavController
 import com.example.core.view.BaseActivity
 import com.example.uitoolkit.loading.LoadingPopup
 import com.example.uitoolkit.loading.LoadingPopup.Companion.getInstance
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
@@ -42,6 +43,9 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        if (savedInstanceState == null) {
+            setUpBottomNavigationWithGraphs()
+        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -51,11 +55,10 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setUpBottomNavigationWithGraphs() {
+
         val graphIds = listOf(
             R.navigation.nav_home,
-            R.navigation.nav_home,
-            R.navigation.nav_home,
-            R.navigation.nav_home,
+            R.navigation.nav_other
         )
 
         val controller = bottomNavigationView.setupWithNavController(

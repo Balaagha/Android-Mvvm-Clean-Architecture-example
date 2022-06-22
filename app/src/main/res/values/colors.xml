@@ -49,8 +49,16 @@
     <color name="white_gray_3">#F0F0F0</color>
 
 
+    <!--  AvatarView Example region start  -->
+<!--    <array name="avatar_view_example">-->
+<!--        <item>@color/red</item>-->
+<!--        <item>@color/md_orange_100</item>-->
+<!--        <item>@color/md_green_100</item>-->
+<!--        <item>@color/md_blue_100</item>-->
+<!--    </array>-->
+    <!--  AvatarView Example region end  -->
+
 
     <color name="colorOnBoardingIndicatorInactive">#72BCFE</color>
-
 
 </resources>
